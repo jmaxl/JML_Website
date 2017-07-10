@@ -1,0 +1,23 @@
+{
+    "name": "phpBoilerplate",
+    "description": "This is my boilerplate for every small project.",
+    "type": "website",
+    "keywords": ["edit these"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Maik Schößler",
+            "email": "ms2002@onlinehome.de"
+        }
+    ],
+
+    "require": {
+        "php": "^5.4 || ^7.0",
+        "paragonie/random_compat": "^1.0|^2.0",
+        "twig/twig": "2.4.3",
+        "ramsey/uuid": "3.6.1"
+    },
+    "autoload": {
+        "psr-4": {"Project\\": "src/"}
+    }
+}
