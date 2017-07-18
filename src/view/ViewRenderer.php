@@ -1,24 +1,35 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Project\View;
 
+use Project\Configuration;
+use Project\View\ValueObject\TemplateDir;
+use Project\View\ValueObject\CacheDir;
 
 class ViewRenderer
 {
-    const TEMPLATE_DIR = ROOT_PATH . '/templates';
-    const CACHE_DIR = ROOT_PATH . '/cache';
+    /**
+     * @var TemplateDir $templateDir
+     */
+    protected $templateDir;
+
+    protected $cacheDir;
 
     protected $viewRenderer;
 
-    public function __construct()
+    public function __construct(Configuration $configuration)
     {
-        $loaderFilesystem = new \Twig_Loader_Filesystem(self::TEMPLATE_DIR);
+        $template = $configuration->getEntryByName('template');
+
+        $this->templateDir = TemplateDir::fromString($template['dir']);
+        $this->cacheDir = CacheDir::fromString($template['cacheDir']);
+
+        $loaderFilesystem = new \Twig_Loader_Filesystem($this->templateDir->getTemplateDir());
         $this->viewRenderer = new \Twig_Environment($loaderFilesystem, array(
-            'cache' => self::CACHE_DIR,
+            'cache' => $template['cacheDir'],
         ));
     }
-
 
     public function renderTemplate(string $template, array $config): void
     {
