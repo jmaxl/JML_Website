@@ -13,13 +13,8 @@ $configuration = new Configuration();
 $renderer = new ViewRenderer($configuration);
 $database = Database::getInstance();
 
-$users = $database->fetchById('user', array('idName' => 'userId', 'idValue' => 12345267));
+$template = 'index.twig';
 
-$template = 'page.twig';
-
-$variables = ['variable' => 'Dies ist eine Testseite'];
-
+$variables = ['variable' => ''];
 
 $renderer->renderTemplate($template, $variables);
-
-var_dump($users);
