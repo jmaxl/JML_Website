@@ -15,7 +15,7 @@ class Configuration
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getConfiguration(): array
     {
@@ -25,7 +25,7 @@ class Configuration
     public function getEntryByName(string $name)
     {
         if (!isset($this->configuration[$name])) {
-            throw new \Exception('there has to be a valid config key');
+            throw new \InvalidArgumentException('there has to be a valid config key');
         }
 
         return $this->configuration[$name];
