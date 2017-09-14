@@ -22,10 +22,6 @@ return [
         'index' => [
             'controller' => 'IndexController',
             'action' => 'indexAction'
-        ],
-        'notfound' => [
-            'controller' => 'BasicController',
-            'action' => 'notFoundAction'
         ]
     ]
 ];
