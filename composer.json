@@ -1,13 +1,13 @@
 {
-    "name": "phpBoilerplate",
-    "description": "This is my boilerplate for every small project.",
+    "name": "JML Work Website",
+    "description": "This website contains all my actual work.",
     "type": "website",
     "keywords": ["edit these"],
     "license": "MIT",
     "authors": [
         {
-            "name": "Maik Schößler",
-            "email": "ms2002@onlinehome.de"
+            "name": "Julius Lukas",
+            "email": "juliuslukas@googlemail.com"
         }
     ],
     "require": {
@@ -16,7 +16,6 @@
         "paragonie/random_compat": "^1.0|^2.0",
         "twig/twig": "2.4.3",
         "ramsey/uuid": "3.6.1",
-        "league/uri": "5.*",
         "claviska/simpleimage": "3.*"
     },
     "autoload": {

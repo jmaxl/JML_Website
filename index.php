@@ -1,6 +1,6 @@
 <?php
 
-namespace Project;
+namespace JML;
 
 use Project\Controller\IndexController;
 use Project\Utilities\Tools;

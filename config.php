@@ -1,8 +1,8 @@
 <?php
 return [
     'project' => [
-        'name' => 'Testproject',
-        'namespace' => 'Project'
+        'name' => 'JML Website',
+        'namespace' => 'JML'
     ],
     'template' => [
         'name' => 'default',
@@ -13,7 +13,7 @@ return [
         'host' => 'localhost',
         'user' => 'root',
         'password' => '',
-        'database' => 'boilerplate'
+        'database' => 'database_jml'
     ],
     'controller' => [
         'namespace' => 'Controller'
@@ -22,6 +22,10 @@ return [
         'index' => [
             'controller' => 'IndexController',
             'action' => 'indexAction'
+        ],
+        'impressum' => [
+            'controller' => 'IndexController',
+            'action' => 'impressumAction',
         ]
     ]
 ];

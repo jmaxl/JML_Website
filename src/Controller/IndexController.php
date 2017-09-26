@@ -10,7 +10,12 @@ class IndexController extends DefaultController
         $this->showStandardPage('home');
     }
 
-    public function differentIndexAcion(): void
+    public function impressumAction(): void
+    {
+        $this->showStandardPage('impressum');
+    }
+
+    public function differentIndexAction(): void
     {
         try {
             $this->viewRenderer->addViewConfig('slider', 'sliderVariable');

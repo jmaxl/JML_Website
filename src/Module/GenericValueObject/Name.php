@@ -5,6 +5,8 @@ namespace Project\Module\GenericValueObject;
 
 class Name
 {
+    const MIN_NAME_LENGTH = 2;
+
     protected $name;
 
     protected function __construct(string $name)
@@ -22,7 +24,7 @@ class Name
 
     protected static function ensureNameIsValid(string $name): void
     {
-        if (strlen($name) < 2) {
+        if (strlen($name) < self::MIN_NAME_LENGTH) {
             throw new \InvalidArgumentException('Dieser name ist zu kurz!', 1);
         }
     }

@@ -26,9 +26,9 @@ class DefaultController
     /**
      * DefaultController constructor.
      */
-    public function __construct()
+    public function __construct(Configuration $configuration)
     {
-        $this->configuration = new Configuration();
+        $this->configuration = $configuration;
         $this->viewRenderer = new ViewRenderer($this->configuration);
         $this->database = Database::getInstance();
 

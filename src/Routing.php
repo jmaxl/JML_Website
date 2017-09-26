@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Project;
+namespace JML;
 
 
 class Routing
@@ -13,11 +13,14 @@ class Routing
     protected $projectNamespace;
     protected $controllerNamespace;
 
+    protected $configuration;
+
     public function __construct(Configuration $configuration)
     {
         $this->routeConfiguration = $configuration->getEntryByName('route');
         $this->controllerNamespace = $configuration->getEntryByName('controller')['namespace'];
         $this->projectNamespace = $configuration->getEntryByName('project')['namespace'];
+        $this->configuration = $configuration;
     }
 
     public function startRoute(string $route): void
@@ -35,7 +38,7 @@ class Routing
         $controllerName = $this->projectNamespace . '\\' . $this->controllerNamespace . '\\' . $route['controller'];
         $actionName = $route['action'];
 
-        $controller = new $controllerName();
+        $controller = new $controllerName($this->configuration);
         $controller->$actionName();
     }
 }
