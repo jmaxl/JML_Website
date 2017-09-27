@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Project\Controller;
+namespace JML\Controller;
 
 class IndexController extends DefaultController
 {

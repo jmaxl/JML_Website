@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace Project\Module\GenericValueObject;
+namespace JML\Module\GenericValueObject;
 
 use Ramsey\Uuid\Uuid;
 

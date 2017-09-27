@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Project\View\ValueObject;
+namespace JML\View\ValueObject;
 
 
 class TemplateDir

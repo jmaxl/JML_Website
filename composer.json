@@ -19,6 +19,6 @@
         "claviska/simpleimage": "3.*"
     },
     "autoload": {
-        "psr-4": {"Project\\": "src/"}
+        "psr-4": {"JML\\": "src/"}
     }
 }

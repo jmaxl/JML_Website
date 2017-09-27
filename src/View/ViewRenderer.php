@@ -1,11 +1,11 @@
 <?php
 
-namespace Project\View;
+namespace JML\View;
 
-use Project\Configuration;
-use Project\Utilities\Converter;
-use Project\View\ValueObject\CacheDir;
-use Project\View\ValueObject\TemplateDir;
+use JML\Configuration;
+use JML\Utilities\Converter;
+use JML\View\ValueObject\CacheDir;
+use JML\View\ValueObject\TemplateDir;
 
 class ViewRenderer
 {

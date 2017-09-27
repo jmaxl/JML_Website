@@ -1,8 +1,8 @@
 <?php
 
-namespace Project\Module\Database;
+namespace JML\Module\Database;
 
-use Project\Configuration;
+use JML\Configuration;
 
 class Database
 {

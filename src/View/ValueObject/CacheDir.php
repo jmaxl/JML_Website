@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Project\View\ValueObject;
+namespace JML\View\ValueObject;
 
 
 class CacheDir
@@ -18,7 +18,7 @@ class CacheDir
         self::ensureValueIsValid($templateDir);
         $templateDir = self::convertValue($templateDir);
 
-        self::ensureTemplateDirExists($templateDir);
+        self::ensureCacheDirIsValidDir($templateDir);
 
         return new self($templateDir);
     }
@@ -37,10 +37,10 @@ class CacheDir
         return ROOT_PATH . $tempDir;
     }
 
-    protected static function ensureTemplateDirExists(string $templateDir): void
+    protected static function ensureCacheDirIsValidDir(string $templateDir): void
     {
         if (is_dir($templateDir) === false) {
-            throw new \Exception('this template dir is no valid dir ... it does not exists.');
+            throw new \Exception('this Cache dir is no valid dir ... it does not exists.');
         }
     }
 

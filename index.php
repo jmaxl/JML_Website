@@ -2,8 +2,8 @@
 
 namespace JML;
 
-use Project\Controller\IndexController;
-use Project\Utilities\Tools;
+use JML\Controller\IndexController;
+use JML\Utilities\Tools;
 
 define('ROOT_PATH', getcwd());
 

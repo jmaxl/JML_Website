@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Project\Utilities;
+namespace JML\Utilities;
 
 class Tools
 {

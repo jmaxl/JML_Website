@@ -6,13 +6,13 @@
  * Time: 22:47
  */
 
-namespace Project\Module\Picture;
+namespace JML\Module\Picture;
 
 
-use Project\Module\GenericValueObject\Datetime;
-use Project\Module\GenericValueObject\Id;
-use Project\Module\GenericValueObject\Link;
-use Project\Module\GenericValueObject\Title;
+use JML\Module\GenericValueObject\Datetime;
+use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Link;
+use JML\Module\GenericValueObject\Title;
 
 class Picture
 {

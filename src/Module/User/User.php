@@ -1,9 +1,9 @@
 <?php
 
-namespace Project\Module\User;
+namespace JML\Module\User;
 
-use Project\Module\GenericValueObject\Id;
-use Project\Module\GenericValueObject\Name;
+use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Name;
 
 class User
 {

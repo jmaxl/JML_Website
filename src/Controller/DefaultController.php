@@ -1,14 +1,14 @@
 <?php
 
-namespace Project\Controller;
+namespace JML\Controller;
 
-use Project\Configuration;
-use Project\Module\Database\Database;
-use Project\View\ViewRenderer;
+use JML\Configuration;
+use JML\Module\Database\Database;
+use JML\View\ViewRenderer;
 
 /**
  * Class DefaultController
- * @package Project\Controller
+ * @package JML\Controller
  */
 class DefaultController
 {
