@@ -11,18 +11,37 @@ namespace JML;
 
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Title;
-use Project\Module\GenericValueObject\Datetime;
-use Project\Module\GenericValueObject\Text;
+use JML\Module\GenericValueObject\Text;
+use JML\Module\GenericValueObject\Datetime;
 
 class Article
 {
+    /** @var Id $articleId */
     protected $articleId;
-    protected §title;
+
+    /** @var Title $title */
+    protected $title;
+
+    /** @var  Title $subtitle */
     protected $subtitle;
+
+    /** @var Text $text */
     protected $text;
+
+    /** @var  $userId */
     protected $userId;
+
+    /** @var Datetime $created */
     protected $created;
 
+    /**
+     * Article constructor.
+     * @param Id $articleId
+     * @param Title $title
+     * @param Text $text
+     * @param Id $userId
+     * @param Datetime $created
+     */
     public function __construct(Id $articleId, Title $title, Text $text, Id $userId, Datetime $created)
     {
         $this->articleId = $articleId;

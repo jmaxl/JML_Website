@@ -14,12 +14,24 @@ use JML\Module\GenericValueObject\Name;
 
 class Author
 {
+    /** @var Id $authorId */
     protected $authorId;
+
+    /** @var Id $userId */
     protected $userId;
+
+    /** @var Name $firstname */
     protected $firstname;
+
+    /** @var  Name $name */
     protected $name;
 
-
+    /**
+     * Author constructor.
+     * @param Id $authorId
+     * @param Id $userId
+     * @param Name $firstname
+     */
     public function __construct(Id $authorId, Id $userId, Name $firstname)
     {
         $this->authorId = $authorId;

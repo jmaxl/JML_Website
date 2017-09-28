@@ -7,15 +7,39 @@ use JML\Module\GenericValueObject\Name;
 
 class User
 {
+    /** @var Id $userId */
     protected $userId;
+
+    /** @var Name $firstname */
     protected $firstname;
+
+    /** @var Name $name */
     protected $name;
+
+    /** @var Name $username */
     protected $username;
+
+    /** @var  $mail */
     protected $mail;
+
+    /** @var  $password */
     protected $password;
+
+    /** @var  $avatarUrl */
     protected $avatarUrl;
+
+    /** @var bool $verified */
     protected $verified;
 
+    /**
+     * User constructor.
+     * @param Id $userId
+     * @param Name $firstname
+     * @param Name $username
+     * @param $mail
+     * @param $password
+     * @param bool $verified
+     */
     public function __construct(Id $userId, Name $firstname, Name $username, $mail, $password, Bool $verified)
     {
         $this->userId = $userId;
@@ -145,5 +169,4 @@ class User
     {
         $this->verified = $verified;
     }
-
 }

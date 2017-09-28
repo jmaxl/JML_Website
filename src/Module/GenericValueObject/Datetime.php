@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
+use Project\Module\GenericValueObject\AbstractDatetime;
 
 class Datetime extends AbstractDatetime implements DatetimeInterface
 {

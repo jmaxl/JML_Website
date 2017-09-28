@@ -113,5 +113,4 @@ class Picture
     {
         return $this->created;
     }
-
 }
