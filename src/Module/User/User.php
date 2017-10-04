@@ -31,6 +31,9 @@ class User
     /** @var bool $verified */
     protected $verified;
 
+    /** @var  bool $isLoggedIn */
+    protected $isLoggedIn;
+
     /**
      * User constructor.
      * @param Id $userId
@@ -48,6 +51,17 @@ class User
         $this->mail = $mail;
         $this->password = $password;
         $this->verified = $verified;
+        $this->isLoggedIn = false;
+    }
+
+    public function logInUser($password): bool
+    {
+        if ($this->password === $password) {
+         $this->isLoggedIn = true;
+        } else {
+            $this->isLoggedIn = false;
+        }
+        return $this->isLoggedIn;
     }
 
     /**

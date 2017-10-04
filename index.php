@@ -3,6 +3,7 @@
 namespace JML;
 
 use JML\Controller\IndexController;
+use JML\Module\GenericValueObject\Id;
 use JML\Utilities\Tools;
 
 define('ROOT_PATH', getcwd());
@@ -20,6 +21,6 @@ $routing = new Routing(new Configuration());
 try {
     $routing->startRoute($route);
 } catch(\InvalidArgumentException $error) {
-    $indexController = new IndexController();
+    $indexController = new IndexController(new Configuration());
     $indexController->errorPageAction();
 }

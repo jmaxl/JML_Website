@@ -3,11 +3,18 @@ declare(strict_types=1);
 
 namespace JML\Controller;
 
+use JML\Module\User\UserService;
+
 class IndexController extends DefaultController
 {
     public function indexAction(): void
     {
-        $this->showStandardPage('home');
+        $mail = 'peter@peter.de';
+        $password = 'peter';
+        $userService = new UserService();
+        $user = $userService->getLoggedInUserByMail($mail, $password);
+        var_dump($user);
+
     }
 
     public function impressumAction(): void
