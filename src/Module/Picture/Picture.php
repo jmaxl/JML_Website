@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 21.09.17
- * Time: 22:47
- */
+declare(strict_types=1);
 
 namespace JML\Module\Picture;
 

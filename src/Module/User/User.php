@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace JML\Module\User;
 
 use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Mail;
 use JML\Module\GenericValueObject\Name;
 
 class User
@@ -19,7 +21,7 @@ class User
     /** @var Name $username */
     protected $username;
 
-    /** @var  $mail */
+    /** @var Mail $mail */
     protected $mail;
 
     /** @var  $password */
@@ -39,11 +41,11 @@ class User
      * @param Id $userId
      * @param Name $firstname
      * @param Name $username
-     * @param $mail
+     * @param Mail $mail
      * @param $password
      * @param bool $verified
      */
-    public function __construct(Id $userId, Name $firstname, Name $username, $mail, $password, Bool $verified)
+    public function __construct(Id $userId, Name $firstname, Name $username, Mail $mail, $password, Bool $verified)
     {
         $this->userId = $userId;
         $this->firstname = $firstname;
@@ -121,17 +123,17 @@ class User
     }
 
     /**
-     * @return mixed
+     * @return Mail
      */
-    public function getMail()
+    public function getMail(): Mail
     {
         return $this->mail;
     }
 
     /**
-     * @param mixed $mail
+     * @param  Mail $mail
      */
-    public function setMail($mail)
+    public function setMail(Mail $mail)
     {
         $this->mail = $mail;
     }

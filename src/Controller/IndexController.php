@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace JML\Controller;
 
+use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
 use JML\Module\User\UserService;
 
 class IndexController extends DefaultController
@@ -11,8 +13,10 @@ class IndexController extends DefaultController
     {
         $mail = 'peter@peter.de';
         $password = 'peter';
-        $userService = new UserService();
-        $user = $userService->getLoggedInUserByMail($mail, $password);
+        $userService = new UserService(Database::getInstance());
+        //$user = $userService->getLoggedInUserByMail($mail, $password);
+        $id = Id::fromString('b9e4103d-6d29-43d4-8a18-df83188c03b8');
+        $user = $userService->getUserById($id);
         var_dump($user);
 
     }

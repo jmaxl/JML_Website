@@ -1,39 +1,46 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 28.09.17
- * Time: 21:14
- */
+declare(strict_types=1);
+
 
 namespace JML\Module\User;
 
 
+use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Mail;
+
 class UserService
 {
-    public function getLoggedInUserByMail($mail, $password): User
+    protected $userRepository;
+    protected $userFactory;
+
+    public function __construct(Database $database)
     {
-        $userRepository = new UserRepository();
-        $result = $userRepository->getUserByMail($mail);
+        $this->userRepository = new UserRepository($database);
+        $this->userFactory = new UserFactory();
+    }
+
+    public function getLoggedInUserByMail(Mail $mail, $password): User
+    {
+        $result = $this->userRepository->getUserByMail($mail);
 
         if (count($result) !== 1) {
             throw new \Exception('Mail not found!');
         }
 
-        $userFactory = new UserFactory();
-        return $userFactory->getLoggedInUserByPassword($result[0], $password);
+        return $this->userFactory->getLoggedInUserByPassword($result[0], $password);
     }
 
-    public function getUserByID($Id): User
+    public function getUserById(Id $id): User
     {
-        $userRespository = new UserRepository();
-        $result = $userRespository->getUserById($Id);
+        $result = $this->userRepository->getUserById($id);
 
         if (count($result) !== 1) {
             throw new \Exception('User not found!');
         }
 
-        $userFactory = new UserFactory();
-        return $userFactory->getUser($result[0]);
+        return $this->userFactory->getUser($result);
     }
 }
+
+

@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 28.09.17
- * Time: 21:15
- */
+declare(strict_types=1);
+
 
 namespace JML\Module\User;
 
@@ -22,7 +18,7 @@ class UserFactory
         $username = Name::fromString($result->username);
         $mail = Mail::fromString($result->mail);
         $userPassword = $result->password;
-        $verified = (bool) $result->verified;
+        $verified = (bool)$result->verified;
 
         $user = new User($userId, $firstname, $username, $mail, $userPassword, $verified);
 
@@ -32,20 +28,9 @@ class UserFactory
     public function getLoggedInUserByPassword($result, $password): User
     {
         $user = $this->getUser($result);
-
-        /**$userId = Id::fromString($result->userId);
-        $firstname = Name::fromString($result->firstname);
-        $username = Name::fromString($result->username);
-        $mail = $result->mail;
-        $userPassword = $result->password;
-        $verified = (bool) $result->verified;
-
-        $user = new User($userId, $firstname, $username, $mail, $userPassword, $verified);*/
-
-        if ($user->logInUser($password) === false){
+        if ($user->logInUser($password) === false) {
             throw new \Exception('Wrong password, try again!');
         }
         return $user;
     }
-
 }

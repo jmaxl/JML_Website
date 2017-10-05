@@ -1,28 +1,30 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 28.09.17
- * Time: 21:15
- */
+declare(strict_types=1);
+
 
 namespace JML\Module\User;
 
 
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Mail;
 
 class UserRepository
 {
-    public function getUserByMail($mail): array
+    protected $database;
+
+    public function __construct(Database $database)
     {
-        $database = Database::getInstance();
-        return $database->fetchByStringParameter('user', 'mail', $mail);
+        $this->database = $database;
     }
 
-    public function getUserByID($Id): array
+    public function getUserByMail(Mail $mail): array
     {
-        $database = Database::getInstance();
-        return $database->fetchById('user', 'userId', $Id);
+        return $this->database->fetchByStringParameter('user', 'mail', $mail->getMail());
     }
 
+    public function getUserById(Id $id)
+    {
+        return $this->database->fetchById('user', 'userId', $id->toString());
+    }
 }
