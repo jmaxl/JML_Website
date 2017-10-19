@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace JML\Controller;
 
+use JML\Module\Article\ArticleService;
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\User\UserService;
@@ -19,7 +20,10 @@ class IndexController extends DefaultController
         //$user = $userService->getUserById($id);
         //var_dump($user);
 
-        var_dump($userService->saveUser());
+       // var_dump($userService->saveUser());
+
+        $articleService = new ArticleService($this->database);
+        var_dump($articleService->getAllArticleOrderByDate());
 
 
     }

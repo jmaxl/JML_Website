@@ -8,8 +8,10 @@ use JML\Module\Database\Database;
 
 class ArticleService
 {
-
+    /** @var ArticleRepository  */
     protected $articleRepository;
+
+    /** @var ArticleFactory  */
     protected $articleFactory;
 
     public function __construct(Database $database)
@@ -20,8 +22,11 @@ class ArticleService
 
     public function getAllArticleOrderByDate(): array
     {
-     $result = $this->articleRepository->getAllArticleByDate();
-     return  $this->articleFactory->getAllArticle($result);
+        $articles = [];
+        $result = $this->articleRepository->getAllArticleByDate();
+        foreach ($result as $article) {
+            $articles[] = $this->articleFactory->getArticle($article);
+        }
+        return $articles;
     }
-
 }

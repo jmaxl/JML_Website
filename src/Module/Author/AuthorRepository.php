@@ -23,5 +23,4 @@ class AuthorRepository
         $query->where('firstname', '=', $firstname->getName());
         return $this->database->fetch($query);
     }
-
 }

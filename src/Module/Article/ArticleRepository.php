@@ -19,7 +19,7 @@ class ArticleRepository
 
     public function getAllArticleByDate(): array
     {
-        $query = $this->database->getNewSelectQuery(self::TABLE;
+        $query = $this->database->getNewSelectQuery(self::TABLE);
         $query->orderBy('created', 'DESC');
         return $this->database->fetchAll($query);
     }
