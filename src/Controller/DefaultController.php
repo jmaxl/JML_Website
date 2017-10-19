@@ -30,7 +30,7 @@ class DefaultController
     {
         $this->configuration = $configuration;
         $this->viewRenderer = new ViewRenderer($this->configuration);
-        $this->database = Database::getInstance();
+        $this->database = new Database($this->configuration);
 
         $this->setDefaultViewConfig();
     }

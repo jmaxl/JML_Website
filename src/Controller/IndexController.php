@@ -13,11 +13,14 @@ class IndexController extends DefaultController
     {
         $mail = 'peter@peter.de';
         $password = 'peter';
-        $userService = new UserService(Database::getInstance());
+        $userService = new UserService($this->database);
         //$user = $userService->getLoggedInUserByMail($mail, $password);
-        $id = Id::fromString('b9e4103d-6d29-43d4-8a18-df83188c03b8');
-        $user = $userService->getUserById($id);
-        var_dump($user);
+        //$id = Id::fromString('b9e4103d-6d29-43d4-8a18-df83188c03b8');
+        //$user = $userService->getUserById($id);
+        //var_dump($user);
+
+        var_dump($userService->saveUser());
+
 
     }
 

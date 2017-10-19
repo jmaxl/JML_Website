@@ -93,7 +93,7 @@ class User
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): ?Name
     {
         return $this->name;
     }
@@ -101,7 +101,7 @@ class User
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setName(Name $name)
     {
         $this->name = $name;
     }

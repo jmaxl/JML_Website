@@ -18,9 +18,18 @@ class UserFactory
         $username = Name::fromString($result->username);
         $mail = Mail::fromString($result->mail);
         $userPassword = $result->password;
-        $verified = (bool)$result->verified;
+        $verified = false;
+        if(isset($result->verified)){
+            $verified = $result->verified;
+        }
 
         $user = new User($userId, $firstname, $username, $mail, $userPassword, $verified);
+
+        if ($result->name !== null){
+            $name = Name::fromString($result->name);
+            $user->setName($name);
+        }
+
 
         return $user;
     }

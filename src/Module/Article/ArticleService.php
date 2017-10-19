@@ -2,16 +2,26 @@
 declare (strict_types=1);
 
 
-namespace JML;
+namespace JML\Module\Article;
+
+use JML\Module\Database\Database;
 
 class ArticleService
 {
 
-    /* getAllArticleOrderByDate
-    Database kann mit fetchAllOrderBy abgefragt werden, dort dann created als Orderby und DEC als orderKind
-    aus der Datenbank kommen Standardklassen, deswegen muss in der Factory eine schöner Artikel gemacht werden
-     */
+    protected $articleRepository;
+    protected $articleFactory;
 
+    public function __construct(Database $database)
+    {
+        $this->articleRespository = new ArticleRepository($database);
+        $this->articleFactory = new ArticleFactory();
+    }
 
+    public function getAllArticleOrderByDate(): array
+    {
+     $result = $this->articleRepository->getAllArticleByDate();
+     return  $this->articleFactory->getAllArticle($result);
+    }
 
 }
