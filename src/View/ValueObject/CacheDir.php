@@ -1,18 +1,30 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\View\ValueObject;
 
-
+/**
+ * Class CacheDir
+ * @package JML\View\ValueObject
+ */
 class CacheDir
 {
+    /** @var string $cacheDir */
     protected $cacheDir;
 
+    /**
+     * CacheDir constructor.
+     * @param string $templateDir
+     */
     protected function __construct(string $templateDir)
     {
         $this->cacheDir = $templateDir;
     }
 
+    /**
+     * @param string $templateDir
+     * @return CacheDir
+     */
     public static function fromString(string $templateDir): self
     {
         self::ensureValueIsValid($templateDir);
@@ -23,6 +35,10 @@ class CacheDir
         return new self($templateDir);
     }
 
+    /**
+     * @param string $templateDir
+     * @throws \Exception
+     */
     protected static function ensureValueIsValid(string $templateDir): void
     {
         if (strlen($templateDir) < 3) {
@@ -30,6 +46,10 @@ class CacheDir
         }
     }
 
+    /**
+     * @param string $templateDir
+     * @return string
+     */
     protected static function convertValue(string $templateDir): string
     {
         $tempDir = rtrim($templateDir, '/') . '/';
@@ -37,6 +57,10 @@ class CacheDir
         return ROOT_PATH . $tempDir;
     }
 
+    /**
+     * @param string $templateDir
+     * @throws \Exception
+     */
     protected static function ensureCacheDirIsValidDir(string $templateDir): void
     {
         if (is_dir($templateDir) === false) {
@@ -44,12 +68,18 @@ class CacheDir
         }
     }
 
+    /**
+     * @return string
+     */
     public function getCacheDir(): string
     {
         return $this->cacheDir;
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString(): string
     {
         return $this->cacheDir;
     }

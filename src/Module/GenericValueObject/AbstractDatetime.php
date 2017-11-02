@@ -3,6 +3,10 @@ declare (strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
+/**
+ * Class AbstractDatetime
+ * @package JML\Module\GenericValueObject
+ */
 abstract class AbstractDatetime
 {
     const DATE_FORMAT = 'Y-m-d H:i:s';

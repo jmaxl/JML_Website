@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 27.09.17
- * Time: 22:44
- */
+declare (strict_types=1);
 
-namespace JML;
-
+namespace JML\Module\Article;
 
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Title;
 use JML\Module\GenericValueObject\Text;
 use JML\Module\GenericValueObject\Datetime;
 
+/**
+ * Class Article
+ * @package JML\Module\Article
+ */
 class Article
 {
     /** @var Id $articleId */
@@ -36,10 +34,10 @@ class Article
 
     /**
      * Article constructor.
-     * @param Id $articleId
-     * @param Title $title
-     * @param Text $text
-     * @param Id $userId
+     * @param Id       $articleId
+     * @param Title    $title
+     * @param Text     $text
+     * @param Id       $userId
      * @param Datetime $created
      */
     public function __construct(Id $articleId, Title $title, Text $text, Id $userId, Datetime $created)
@@ -47,7 +45,7 @@ class Article
         $this->articleId = $articleId;
         $this->title = $title;
         $this->text = $text;
-        $this->userid = $userId;
+        $this->userId = $userId;
         $this->created = $created;
     }
 

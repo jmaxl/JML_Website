@@ -1,19 +1,32 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
+/**
+ * Class Name
+ * @package JML\Module\GenericValueObject
+ */
 class Name
 {
     const MIN_NAME_LENGTH = 2;
 
+    /** @var string $name */
     protected $name;
 
+    /**
+     * Name constructor.
+     * @param string $name
+     */
     protected function __construct(string $name)
     {
         $this->name = $name;
     }
 
+    /**
+     * @param string $name
+     * @return Name
+     */
     public static function fromString(string $name): self
     {
         self::ensureNameIsValid($name);
@@ -22,6 +35,9 @@ class Name
         return new self($name);
     }
 
+    /**
+     * @param string $name
+     */
     protected static function ensureNameIsValid(string $name): void
     {
         if (strlen($name) < self::MIN_NAME_LENGTH) {
@@ -29,6 +45,10 @@ class Name
         }
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
     protected static function convertName(string $name): string
     {
         if (strpos($name, '-') >= 0) {
@@ -47,11 +67,17 @@ class Name
         return $name;
     }
 
+    /**
+     * @return string
+     */
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->name;

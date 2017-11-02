@@ -1,8 +1,12 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Utilities;
 
+/**
+ * Class Tools
+ * @package JML\Utilities
+ */
 class Tools
 {
     /**

@@ -1,9 +1,12 @@
 <?php
-declare(strict_types = 1);
+declare (strict_types = 1);
 
 namespace JML\Utilities;
 
-
+/**
+ * Class Converter
+ * @package JML\Utilities
+ */
 class Converter
 {
     const GERMAN_WEEKDAYS = [
@@ -27,6 +30,10 @@ class Converter
         ]
     ];
 
+    /**
+     * @param int $day
+     * @return string
+     */
     public static function convertIntToWeekday(int $day): string
     {
         if ($day < 0 && $day > 6) {
@@ -36,6 +43,10 @@ class Converter
         return self::GERMAN_WEEKDAYS['long'][$day];
     }
 
+    /**
+     * @param int $day
+     * @return string
+     */
     public static function convertIntToWeekdayShort(int $day): string
     {
         if ($day < 0 && $day > 6) {

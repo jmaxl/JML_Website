@@ -1,4 +1,5 @@
 <?php
+declare (strict_types=1);
 
 namespace JML\View;
 
@@ -7,6 +8,10 @@ use JML\Utilities\Converter;
 use JML\View\ValueObject\CacheDir;
 use JML\View\ValueObject\TemplateDir;
 
+/**
+ * Class ViewRenderer
+ * @package JML\View
+ */
 class ViewRenderer
 {
     const DEFAULT_PAGE_TEMPLATE = 'index.twig';
@@ -56,6 +61,15 @@ class ViewRenderer
     }
 
     /**
+     * @param string $name
+     * @param        $value
+     */
+    public function addViewConfig(string $name, $value): void
+    {
+        $this->config[$name] = $value;
+    }
+
+    /**
      * Add filter
      */
     protected function addViewFilter(): void
@@ -71,14 +85,5 @@ class ViewRenderer
         });
 
         $this->viewRenderer->addFilter($weekDayShortFilter);
-    }
-
-    /**
-     * @param string $name
-     * @param        $value
-     */
-    public function addViewConfig(string $name, $value): void
-    {
-        $this->config[$name] = $value;
     }
 }

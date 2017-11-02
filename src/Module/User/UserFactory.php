@@ -1,16 +1,22 @@
 <?php
 declare(strict_types=1);
 
-
 namespace JML\Module\User;
-
 
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Mail;
 use JML\Module\GenericValueObject\Name;
 
+/**
+ * Class UserFactory
+ * @package JML\Module\User
+ */
 class UserFactory
 {
+    /**
+     * @param $result
+     * @return User
+     */
     public function getUser($result): User
     {
         $userId = Id::fromString($result->userId);
@@ -30,16 +36,22 @@ class UserFactory
             $user->setName($name);
         }
 
-
         return $user;
     }
 
+    /**
+     * @param $result
+     * @param $password
+     * @return User
+     * @throws \Exception
+     */
     public function getLoggedInUserByPassword($result, $password): User
     {
         $user = $this->getUser($result);
         if ($user->logInUser($password) === false) {
             throw new \Exception('Wrong password, try again!');
         }
+
         return $user;
     }
 }

@@ -1,17 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jml
- * Date: 27.09.17
- * Time: 22:36
- */
+declare (strict_types=1);
 
-namespace JML;
-
+namespace JML\Module\Author;
 
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
 
+/**
+ * Class Author
+ * @package JML\Module\Author
+ */
 class Author
 {
     /** @var Id $authorId */
@@ -28,8 +26,8 @@ class Author
 
     /**
      * Author constructor.
-     * @param Id $authorId
-     * @param Id $userId
+     * @param Id   $authorId
+     * @param Id   $userId
      * @param Name $firstname
      */
     public function __construct(Id $authorId, Id $userId, Name $firstname)

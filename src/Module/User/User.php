@@ -7,6 +7,10 @@ use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Mail;
 use JML\Module\GenericValueObject\Name;
 
+/**
+ * Class User
+ * @package JML\Module\User
+ */
 class User
 {
     /** @var Id $userId */
@@ -56,6 +60,10 @@ class User
         $this->isLoggedIn = false;
     }
 
+    /**
+     * @param $password
+     * @return bool
+     */
     public function logInUser($password): bool
     {
         if ($this->password === $password) {

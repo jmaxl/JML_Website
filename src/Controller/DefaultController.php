@@ -1,4 +1,5 @@
 <?php
+declare (strict_types=1);
 
 namespace JML\Controller;
 
@@ -21,10 +22,9 @@ class DefaultController
     /** @var Database $database */
     protected $database;
 
-    protected $valueObjectService;
-
     /**
      * DefaultController constructor.
+     * @param Configuration $configuration
      */
     public function __construct(Configuration $configuration)
     {
@@ -36,13 +36,8 @@ class DefaultController
     }
 
     /**
-     * Sets default view parameter for sidebar etc.
+     *  use this function if there is nothing found
      */
-    protected function setDefaultViewConfig(): void
-    {
-        $this->viewRenderer->addViewConfig('page', 'notfound');
-    }
-
     public function notFoundAction(): void
     {
         $this->viewRenderer->addViewConfig('page', 'notfound');
@@ -50,11 +45,25 @@ class DefaultController
         $this->viewRenderer->renderTemplate();
     }
 
+    /**
+     * use this function if there is an error
+     */
     public function errorPageAction(): void
     {
         $this->showStandardPage('error');
     }
 
+    /**
+     * Sets default view parameter for sidebar etc.
+     */
+    protected function setDefaultViewConfig(): void
+    {
+        $this->viewRenderer->addViewConfig('page', 'notfound');
+    }
+
+    /**
+     * @param string $name
+     */
     protected function showStandardPage(string $name): void
     {
         try {

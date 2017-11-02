@@ -1,10 +1,15 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
 use League\Uri\Schemes\Http;
 
+/**
+ * @todo add composer plugin
+ * Class Link
+ * @package JML\Module\GenericValueObject
+ */
 class Link
 {
     /** @var  Http $link */
@@ -38,15 +43,19 @@ class Link
         return $this->link;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return (string) $this->link;
     }
 
+    /**
+     * @return string
+     */
     public function toString(): string
     {
         return (string) $this->link;
     }
-
-
 }

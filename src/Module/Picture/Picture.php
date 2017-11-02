@@ -1,14 +1,17 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Module\Picture;
-
 
 use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Link;
 use JML\Module\GenericValueObject\Title;
 
+/**
+ * Class Picture
+ * @package JML\Module\Picture
+ */
 class Picture
 {
     /** @var  Id $pictureId */

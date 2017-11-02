@@ -5,6 +5,10 @@ namespace JML\Module\Database;
 
 use JML\Configuration;
 
+/**
+ * Class Database
+ * @package JML\Module\Database
+ */
 class Database
 {
     /** @var  string $host */
@@ -86,6 +90,10 @@ class Database
         return $query;
     }
 
+    /**
+     * @param string $table
+     * @return Query
+     */
     public function getNewDeleteQuery(string $table): Query
     {
         $query = new Query($table);
@@ -93,7 +101,6 @@ class Database
 
         return $query;
     }
-
 
     /**
      * @param Query $query

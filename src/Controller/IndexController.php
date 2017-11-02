@@ -1,38 +1,37 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
-use JML\Module\Database\Database;
-use JML\Module\GenericValueObject\Id;
-use JML\Module\User\UserService;
 
+/**
+ * Class IndexController
+ * @package JML\Controller
+ */
 class IndexController extends DefaultController
 {
+    /**
+     * main action for the index page
+     */
     public function indexAction(): void
     {
-        $mail = 'peter@peter.de';
-        $password = 'peter';
-        $userService = new UserService($this->database);
-        //$user = $userService->getLoggedInUserByMail($mail, $password);
-        //$id = Id::fromString('b9e4103d-6d29-43d4-8a18-df83188c03b8');
-        //$user = $userService->getUserById($id);
-        //var_dump($user);
-
-       // var_dump($userService->saveUser());
-
         $articleService = new ArticleService($this->database);
         var_dump($articleService->getAllArticleOrderByDate());
-
-
     }
 
+    /**
+     * action for impressum site
+     */
     public function impressumAction(): void
     {
         $this->showStandardPage('impressum');
     }
 
+    /**
+     * @todo remove if function was understood
+     * example action
+     */
     public function differentIndexAction(): void
     {
         try {

@@ -1,8 +1,12 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
+/**
+ * Class Datetime
+ * @package JML\Module\GenericValueObject
+ */
 class Datetime extends AbstractDatetime
 {
     const DATETIME_FORMAT = 'Y-m-d H:i';
@@ -16,6 +20,15 @@ class Datetime extends AbstractDatetime
     const TIME_FORMAT = 'H:i';
 
     const WEEKDAY_FORMAT = 'w';
+
+    /**
+     * @param $datetime
+     * @return Datetime | AbstractDatetime
+     */
+    public static function fromValue($datetime): self
+    {
+        return parent::fromValue($datetime);
+    }
 
     /**
      * @return string
@@ -42,24 +55,24 @@ class Datetime extends AbstractDatetime
     }
 
     /**
-     * @param $datetime
-     * @return AbstractDatetime|DatetimeInterface
+     * @return string
      */
-    public static function fromValue($datetime)
-    {
-        return parent::fromValue($datetime);
-    }
-
     public function getDate(): string
     {
         return (string)date(self::DATE_FORMAT, $this->datetime);
     }
 
+    /**
+     * @return string
+     */
     public function getDateString(): string
     {
         return (string)date(self::DATE_OUTPUT_FORMAT, $this->datetime);
     }
 
+    /**
+     * @return string
+     */
     public function getTimeString(): string
     {
         return (string)date(self::TIME_FORMAT, $this->datetime);

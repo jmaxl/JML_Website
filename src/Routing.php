@@ -1,20 +1,32 @@
 <?php
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace JML;
 
-
+/**
+ * Class Routing
+ * @package JML
+ */
 class Routing
 {
     const ERROR_ROUTE = 'notfound';
 
+    /** @var array $routeConfiguration */
     protected $routeConfiguration;
 
+    /** @var  string $projectNamespace */
     protected $projectNamespace;
+
+    /** @var  string $controllerNamespace */
     protected $controllerNamespace;
 
+    /** @var Configuration $configuration */
     protected $configuration;
 
+    /**
+     * Routing constructor.
+     * @param Configuration $configuration
+     */
     public function __construct(Configuration $configuration)
     {
         $this->routeConfiguration = $configuration->getEntryByName('route');
@@ -23,6 +35,9 @@ class Routing
         $this->configuration = $configuration;
     }
 
+    /**
+     * @param string $route
+     */
     public function startRoute(string $route): void
     {
         if (isset($this->routeConfiguration[$route]) === false) {

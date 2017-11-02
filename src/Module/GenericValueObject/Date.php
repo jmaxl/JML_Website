@@ -1,8 +1,12 @@
 <?php
-declare(strict_types = 1);
+declare (strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
+/**
+ * Class Date
+ * @package JML\Module\GenericValueObject
+ */
 class Date extends AbstractDatetime implements DateInterface
 {
     const DATE_FORMAT = 'Y-m-d';
@@ -12,11 +16,20 @@ class Date extends AbstractDatetime implements DateInterface
     const WEEKDAY_FORMAT = 'w';
 
     /**
+     * @param $datetime
+     * @return AbstractDatetime|DateInterface
+     */
+    public static function fromValue($datetime)
+    {
+        return parent::fromValue($datetime);
+    }
+
+    /**
      * @return string
      */
     public function __toString(): string
     {
-        return (string) date(self::DATE_OUTPUT_FORMAT, $this->datetime);
+        return (string)date(self::DATE_OUTPUT_FORMAT, $this->datetime);
     }
 
     /**
@@ -24,7 +37,7 @@ class Date extends AbstractDatetime implements DateInterface
      */
     public function toString(): string
     {
-        return (string) date(self::DATE_FORMAT, $this->datetime);
+        return (string)date(self::DATE_FORMAT, $this->datetime);
     }
 
     /**
@@ -32,15 +45,6 @@ class Date extends AbstractDatetime implements DateInterface
      */
     public function getWeekday(): int
     {
-        return (int) date(self::WEEKDAY_FORMAT, $this->datetime);
-    }
-
-    /**
-     * @param $datetime
-     * @return AbstractDatetime|DateInterface
-     */
-    public static function fromValue($datetime)
-    {
-        return parent::fromValue($datetime);
+        return (int)date(self::WEEKDAY_FORMAT, $this->datetime);
     }
 }

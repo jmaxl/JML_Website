@@ -1,28 +1,41 @@
 <?php
 declare (strict_types=1);
 
-
 namespace JML\Module\Author;
 
-use JML\Author;
-use JML\AuthorFactory;
-use JML\AuthorRepository;
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Name;
 
+/**
+ * Class AuthorService
+ * @package JML\Module\Author
+ */
 class AuthorService
 {
+    /** @var AuthorRepository $authorRepository */
     protected $authorRepository;
+
+    /** @var AuthorFactory $authorFactory */
     protected $authorFactory;
 
+    /**
+     * AuthorService constructor.
+     * @param Database $database
+     */
     public function __construct(Database $database)
     {
         $this->authorRepository = new AuthorRepository($database);
         $this->authorFactory = new AuthorFactory();
     }
 
-    public function getAuthorByFirstname(): Author
+    /**
+     * @param Name $firstName
+     * @return Author
+     */
+    public function getAuthorByFirstname(Name $firstName): Author
     {
-        $result = $this->authorRepository->getAuthorByFirstname();
+        $result = $this->authorRepository->getAuthorByFirstname($firstName);
+
         return $this->authorFactory->getAuthor($result);
     }
 }
