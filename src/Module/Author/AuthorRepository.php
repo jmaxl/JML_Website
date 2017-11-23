@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML\Module\Author;
 
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
 
 /**
@@ -34,6 +35,18 @@ class AuthorRepository
     {
         $query = $this->database->getNewSelectQuery(self::TABLE);
         $query->where('firstname', '=', $firstname->getName());
+
+        return $this->database->fetch($query);
+    }
+
+    /**
+     * @param Id $authorId
+     * @return mixed
+     */
+    public function getAuthorByAuthorId(Id $authorId)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->where('authorId', '=', $authorId->toString());
 
         return $this->database->fetch($query);
     }

@@ -18,16 +18,38 @@ class AuthorFactory
      */
     public function getAuthor($result): Author
     {
-        $authorId = Id::fromString($result->authorId);
-        $userId = Id::fromString($result->userId);
-        $firstname = Name::fromString($result->firstname);
-
-        $author = new Author($authorId, $userId, $firstname);
-
-        if ($result->name !== null) {
-            $name = Name::fromString($result->name);
-            $author->setName($name);
+        if (empty($result->userId) === false){
+            $userId = Id::fromString($result->userId);
         }
+
+        if (empty($result->firstname) === false){
+            $firstname = Name::fromString($result->firstname);
+        }
+
+        if (isset($userId) || isset($firstname)){
+            $authorId = Id::fromString($result->authorId);
+            $author = new Author($authorId);
+
+            if (empty($result->name) === false) {
+                $name = Name::fromString($result->name);
+                $author->setName($name);
+            }
+
+            if (isset($userId)){
+                $author->setUserId($userId);
+            }
+
+            if (isset($firstname)){
+                $author->setFirstname($firstname);
+            }
+        }
+
+
+
+
+
+
+
 
         return $author;
     }

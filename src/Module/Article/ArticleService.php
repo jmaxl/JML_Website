@@ -3,7 +3,9 @@ declare (strict_types=1);
 
 namespace JML\Module\Article;
 
+use JML\Module\Author\AuthorService;
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
 
 /**
  * Class ArticleService
@@ -11,11 +13,14 @@ use JML\Module\Database\Database;
  */
 class ArticleService
 {
-    /** @var ArticleRepository */
+    /** @var ArticleRepository $articleRepository */
     protected $articleRepository;
 
-    /** @var ArticleFactory */
+    /** @var ArticleFactory $articleFactory */
     protected $articleFactory;
+
+    /** @var AuthorService $authorService */
+    protected $authorService;
 
     /**
      * ArticleService constructor.
@@ -25,6 +30,7 @@ class ArticleService
     {
         $this->articleRepository = new ArticleRepository($database);
         $this->articleFactory = new ArticleFactory();
+        $this->authorService = new AuthorService($database);
     }
 
     /**
@@ -34,10 +40,16 @@ class ArticleService
     {
         $articles = [];
         $result = $this->articleRepository->getAllArticleByDate();
-        foreach ($result as $article) {
-            $articles[] = $this->articleFactory->getArticle($article);
+        foreach ($result as $articleEntry) {
+            $article = $this->articleFactory->getArticle($articleEntry);
+            $authorIds = $this->articleRepository->getAllAuthorIdsByArticleId($article->getArticleId());
+            foreach ($authorIds as $authorId){
+                $authorId = Id::fromString($authorId->authorId);
+                $author = $this->authorService->getAuthorByAuthorId($authorId);
+                $article->addAuthorToAuthorList($author);
+            }
+            $articles[] = $article;
         }
-
         return $articles;
     }
 }

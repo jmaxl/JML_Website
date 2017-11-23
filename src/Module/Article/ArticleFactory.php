@@ -20,9 +20,13 @@ class ArticleFactory
      */
     public function getArticle($result): Article
     {
-        $articleId = Id::fromString($result->authorId);
-        $title = Title::fromString($result->userId);
+        /** @var Id $articleId */
+        $articleId = Id::fromString($result->articleId);
+        /** @var Title $title */
+        $title = Title::fromString($result->title);
+        /** @var Text $text */
         $text = Text::fromString($result->text);
+        /** @var Id $userId */
         $userId = Id::fromString($result->userId);
         /** @var Datetime $created */
         $created = Datetime::fromValue($result->created);

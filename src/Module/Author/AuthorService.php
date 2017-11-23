@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML\Module\Author;
 
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
 
 /**
@@ -38,4 +39,16 @@ class AuthorService
 
         return $this->authorFactory->getAuthor($result);
     }
+
+    /**
+     * @param Id $authorId
+     * @return Author
+     */
+    public function getAuthorByAuthorId(Id $authorId): Author
+    {
+        $result = $this->authorRepository->getAuthorByAuthorId($authorId);
+
+        return $this->authorFactory->getAuthor($result);
+    }
+
 }

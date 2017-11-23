@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML\Module\Article;
 
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
 
 /**
  * Class ArticleRepository
@@ -12,6 +13,7 @@ use JML\Module\Database\Database;
 class ArticleRepository
 {
     const TABLE = 'article';
+    const TABLE_ARTICLE_AUTHOR = 'article_author';
 
     /** @var Database $database */
     protected $database;
@@ -35,4 +37,14 @@ class ArticleRepository
 
         return $this->database->fetchAll($query);
     }
+
+    public function getAllAuthorIdsByArticleId(Id $articleId): array
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query->where('articleId', '=', $articleId->toString());
+        $query->addEntityToType('authorId');
+
+        return $this->database->fetchAll($query);
+    }
+
 }

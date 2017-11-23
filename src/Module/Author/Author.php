@@ -26,15 +26,12 @@ class Author
 
     /**
      * Author constructor.
-     * @param Id   $authorId
-     * @param Id   $userId
-     * @param Name $firstname
+     * @param Id $authorId
+
      */
-    public function __construct(Id $authorId, Id $userId, Name $firstname)
+    public function __construct(Id $authorId)
     {
         $this->authorId = $authorId;
-        $this->userId = $userId;
-        $this->firstname = $firstname;
     }
 
     /**
@@ -83,5 +80,13 @@ class Author
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param Id $userId
+     */
+    public function setUserId(Id $userId)
+    {
+        $this->userId = $userId;
     }
 }

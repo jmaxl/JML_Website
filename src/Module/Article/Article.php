@@ -3,6 +3,7 @@ declare (strict_types=1);
 
 namespace JML\Module\Article;
 
+use JML\Module\Author\Author;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Title;
 use JML\Module\GenericValueObject\Text;
@@ -31,6 +32,9 @@ class Article
 
     /** @var Datetime $created */
     protected $created;
+
+    /** @var  array $authorList */
+    protected $authorList = [];
 
     /**
      * Article constructor.
@@ -119,5 +123,34 @@ class Article
     public function getCreated(): Datetime
     {
         return $this->created;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAuthorList(): array
+    {
+        return $this->authorList;
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function addAuthorToAuthorList(Author $author): void
+    {
+        $this->authorList[$author->getAuthorId()->toString()] = $author;
+    }
+
+    /**
+     * @param Author $author
+     */
+    public function removeAuthorFromAuthorList(Author $author): void
+    {
+        unset($this->authorList[$author->getAuthorId()->toString()]);
+    }
+
+    public function resetAuthorList(): void
+    {
+        $this->authorList = [];
     }
 }
