@@ -8,6 +8,7 @@ use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Title;
 use JML\Module\GenericValueObject\Text;
 use JML\Module\GenericValueObject\Datetime;
+use JML\Module\Picture\Picture;
 
 /**
  * Class Article
@@ -36,12 +37,15 @@ class Article
     /** @var  array $authorList */
     protected $authorList = [];
 
+    /** @var array $pictureList */
+    protected $pictureList = [];
+
     /**
      * Article constructor.
-     * @param Id       $articleId
-     * @param Title    $title
-     * @param Text     $text
-     * @param Id       $userId
+     * @param Id $articleId
+     * @param Title $title
+     * @param Text $text
+     * @param Id $userId
      * @param Datetime $created
      */
     public function __construct(Id $articleId, Title $title, Text $text, Id $userId, Datetime $created)
@@ -134,6 +138,14 @@ class Article
     }
 
     /**
+     * @return array
+     */
+    public function getPictureList(): array
+    {
+        return $this->pictureList;
+    }
+
+    /**
      * @param Author $author
      */
     public function addAuthorToAuthorList(Author $author): void
@@ -152,5 +164,26 @@ class Article
     public function resetAuthorList(): void
     {
         $this->authorList = [];
+    }
+
+    /**
+     * @param Picture $picture
+     */
+    public function addPictureToPictureList(Picture $picture): void
+    {
+        $this->pictureList[$picture->getPictureId()->toString()] = $picture;
+    }
+
+    /**
+     * @param Picture $picture
+     */
+    public function removePictureFromPictureList(Picture $picture): void
+    {
+        unset($this->pictureList[$picture->getPictureId()->toString()]);
+    }
+
+    public function resetPictureList(): void
+    {
+        $this->pictureList = [];
     }
 }

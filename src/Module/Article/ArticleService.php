@@ -6,6 +6,7 @@ namespace JML\Module\Article;
 use JML\Module\Author\AuthorService;
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\Picture\PictureService;
 
 /**
  * Class ArticleService
@@ -22,6 +23,8 @@ class ArticleService
     /** @var AuthorService $authorService */
     protected $authorService;
 
+    protected $pictureService;
+
     /**
      * ArticleService constructor.
      * @param Database $database
@@ -31,6 +34,7 @@ class ArticleService
         $this->articleRepository = new ArticleRepository($database);
         $this->articleFactory = new ArticleFactory();
         $this->authorService = new AuthorService($database);
+        $this->pictureService = new PictureService($database);
     }
 
     /**
@@ -48,8 +52,17 @@ class ArticleService
                 $author = $this->authorService->getAuthorByAuthorId($authorId);
                 $article->addAuthorToAuthorList($author);
             }
+            $pictures = $this->pictureService->getAllPicturesByArticleId($article->getArticleId());
+            foreach ($pictures as $picture){
+                $article->addPictureToPictureList($picture);
+            }
+
             $articles[] = $article;
         }
         return $articles;
     }
+
+
+
+
 }

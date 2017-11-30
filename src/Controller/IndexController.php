@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
+use JML\Module\GenericValueObject\Id;
 
 /**
  * Class IndexController
@@ -18,6 +19,7 @@ class IndexController extends DefaultController
     {
         $articleService = new ArticleService($this->database);
         var_dump($articleService->getAllArticleOrderByDate());
+
     }
 
     /**

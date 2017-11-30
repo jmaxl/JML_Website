@@ -20,7 +20,7 @@ class Picture
     /** @var  Title $title */
     protected $title;
 
-    /** @var  Link $pictureUrl */
+    /** @var string $pictureUrl */
     protected $pictureUrl;
 
     /** @var  Id $authorId */
@@ -32,7 +32,7 @@ class Picture
     /** @var  Datetime $created */
     protected $created;
 
-    public function __construct(Id $pictureId, Link $pictureUrl, Id $userId, Datetime $created)
+    public function __construct(Id $pictureId, string $pictureUrl, Id $userId, Datetime $created)
     {
         $this->pictureId = $pictureId;
         $this->pictureUrl = $pictureUrl;
@@ -65,17 +65,17 @@ class Picture
     }
 
     /**
-     * @return Link
+     * @return string
      */
-    public function getPictureUrl(): Link
+    public function getPictureUrl(): string
     {
         return $this->pictureUrl;
     }
 
     /**
-     * @param Link $pictureUrl
+     * @param string $pictureUrl
      */
-    public function setPictureUrl(Link $pictureUrl)
+    public function setPictureUrl(string $pictureUrl)
     {
         $this->pictureUrl = $pictureUrl;
     }
