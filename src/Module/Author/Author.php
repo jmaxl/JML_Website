@@ -61,7 +61,7 @@ class Author
     /**
      * @param Name $firstname
      */
-    public function setFirstname(Name $firstname)
+    public function setFirstname(Name $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -69,7 +69,7 @@ class Author
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): Name
     {
         return $this->name;
     }
@@ -77,7 +77,7 @@ class Author
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -85,7 +85,7 @@ class Author
     /**
      * @param Id $userId
      */
-    public function setUserId(Id $userId)
+    public function setUserId(Id $userId): void
     {
         $this->userId = $userId;
     }

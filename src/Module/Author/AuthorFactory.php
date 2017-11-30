@@ -13,10 +13,11 @@ use JML\Module\GenericValueObject\Name;
 class AuthorFactory
 {
     /**
+     * @todo REFACTORING | null return ok?
      * @param $result
-     * @return Author
+     * @return Author|null
      */
-    public function getAuthor($result): Author
+    public function getAuthor($result): ?Author
     {
         if (empty($result->userId) === false){
             $userId = Id::fromString($result->userId);
@@ -35,22 +36,17 @@ class AuthorFactory
                 $author->setName($name);
             }
 
-            if (isset($userId)){
+            if (empty($userId) === false){
                 $author->setUserId($userId);
             }
 
-            if (isset($firstname)){
+            if (empty($firstname) === false){
                 $author->setFirstname($firstname);
             }
+
+            return $author;
         }
 
-
-
-
-
-
-
-
-        return $author;
+        return null;
     }
 }
