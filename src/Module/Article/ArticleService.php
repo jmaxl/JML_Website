@@ -44,16 +44,19 @@ class ArticleService
     {
         $articles = [];
         $result = $this->articleRepository->getAllArticleByDate();
+
         foreach ($result as $articleEntry) {
             $article = $this->articleFactory->getArticle($articleEntry);
             $authorIds = $this->articleRepository->getAllAuthorIdsByArticleId($article->getArticleId());
-            foreach ($authorIds as $authorId){
+
+            foreach ($authorIds as $authorId) {
                 $authorId = Id::fromString($authorId->authorId);
                 $author = $this->authorService->getAuthorByAuthorId($authorId);
                 $article->addAuthorToAuthorList($author);
             }
             $pictures = $this->pictureService->getAllPicturesByArticleId($article->getArticleId());
-            foreach ($pictures as $picture){
+
+            foreach ($pictures as $picture) {
                 $article->addPictureToPictureList($picture);
             }
 
@@ -61,8 +64,4 @@ class ArticleService
         }
         return $articles;
     }
-
-
-
-
 }

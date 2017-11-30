@@ -68,7 +68,7 @@ class Article
     /**
      * @param Title $title
      */
-    public function setTitle(Title $title)
+    public function setTitle(Title $title): void
     {
         $this->title = $title;
     }
@@ -82,9 +82,9 @@ class Article
     }
 
     /**
-     * @return mixed
+     * @return Title
      */
-    public function getSubtitle()
+    public function getSubtitle(): Title
     {
         return $this->subtitle;
     }
@@ -92,7 +92,7 @@ class Article
     /**
      * @param mixed $subtitle
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(Title $subtitle): void
     {
         $this->subtitle = $subtitle;
     }
@@ -108,7 +108,7 @@ class Article
     /**
      * @param Text $text
      */
-    public function setText(Text $text)
+    public function setText(Text $text): void
     {
         $this->text = $text;
     }
@@ -182,6 +182,9 @@ class Article
         unset($this->pictureList[$picture->getPictureId()->toString()]);
     }
 
+    /**
+     * resets the picture list
+     */
     public function resetPictureList(): void
     {
         $this->pictureList = [];

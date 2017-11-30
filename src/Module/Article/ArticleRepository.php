@@ -38,6 +38,10 @@ class ArticleRepository
         return $this->database->fetchAll($query);
     }
 
+    /**
+     * @param Id $articleId
+     * @return array
+     */
     public function getAllAuthorIdsByArticleId(Id $articleId): array
     {
         $query = $this->database->getNewSelectQuery(self::TABLE_ARTICLE_AUTHOR);
