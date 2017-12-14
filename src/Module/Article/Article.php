@@ -145,6 +145,11 @@ class Article
         return $this->pictureList;
     }
 
+    public function getTeaserPicture()
+    {
+        return reset($this->pictureList);
+    }
+
     /**
      * @param Author $author
      */

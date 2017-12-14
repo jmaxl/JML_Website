@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
-use JML\Module\GenericValueObject\Id;
 
 /**
  * Class IndexController
@@ -18,8 +17,11 @@ class IndexController extends DefaultController
     public function indexAction(): void
     {
         $articleService = new ArticleService($this->database);
-        var_dump($articleService->getAllArticleOrderByDate());
+        $articles = $articleService->getAllArticleOrderByDate();
 
+        $this->viewRenderer->addViewConfig('articles', $articles);
+        $this->viewRenderer->addViewConfig('page', 'home');
+        $this->viewRenderer->renderTemplate();
     }
 
     /**

@@ -392,3 +392,6 @@ template {
 h1 {
   background-color: #ffffff;
 }
+.articles-container {
+  display: flex;
+}
