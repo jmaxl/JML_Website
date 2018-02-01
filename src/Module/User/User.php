@@ -67,11 +67,33 @@ class User
     public function logInUser($password): bool
     {
         if ($this->password === $password) {
-         $this->isLoggedIn = true;
+            $this->logInSuccessUser();
         } else {
-            $this->isLoggedIn = false;
+            $this->logOutUser();
         }
         return $this->isLoggedIn;
+    }
+
+    protected function logInSuccessUser()
+    {
+        $this->isLoggedIn = true;
+        $_SESSION['userId'] = $this->userId->toString();
+    }
+
+    protected function logOutUser()
+    {
+        $this->isLoggedIn = false;
+        unset($_SESSION['userId']);
+    }
+
+    public function logInBySession(): bool
+    {
+        if(isset($_SESSION['userId']) && $_SESSION['userId'] === $this->userId->toString()){
+            $this->logInSuccessUser();
+            return true;
+        }
+        $this->logOutUser();
+        return false;
     }
 
     /**

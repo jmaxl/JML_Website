@@ -4,6 +4,10 @@ declare (strict_types=1);
 namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
+use JML\Module\GenericValueObject\Mail;
+use JML\Module\GenericValueObject\Password;
+use JML\Module\User\UserService;
+use JML\Utilities\Tools;
 
 /**
  * Class IndexController
@@ -32,19 +36,23 @@ class IndexController extends DefaultController
         $this->showStandardPage('impressum');
     }
 
-    /**
-     * @todo remove if function was understood
-     * example action
-     */
-    public function differentIndexAction(): void
+    public function logInAction(): void
     {
-        try {
-            $this->viewRenderer->addViewConfig('slider', 'sliderVariable');
-            $this->viewRenderer->addViewConfig('page', 'home');
+        $this->showStandardPage('logIn');
+    }
 
-            $this->viewRenderer->renderTemplate();
-        } catch (\InvalidArgumentException $error) {
-            $this->notFoundAction();
+    public function logInRedirectAction(): void
+    {
+        $mail = Mail::fromString(Tools::getValue('mail'));
+        //$password = Password::fromString(Tools::getValue('password'));
+        $password = Tools::getValue('password');
+
+        $userService = new UserService($this->database);
+        $user = $userService->getLoggedInUserByMail($mail, $password);
+        if ($user === null){
+            header('Location: ' . Tools::getRouteUrl('logIn'));
+        } else{
+            header('Location: ' . Tools::getRouteUrl('backend'));
         }
     }
 }

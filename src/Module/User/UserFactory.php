@@ -26,7 +26,7 @@ class UserFactory
         $userPassword = $result->password;
         $verified = false;
         if(isset($result->verified)){
-            $verified = $result->verified;
+            $verified = (bool) $result->verified;
         }
 
         $user = new User($userId, $firstname, $username, $mail, $userPassword, $verified);
@@ -45,11 +45,11 @@ class UserFactory
      * @return User
      * @throws \Exception
      */
-    public function getLoggedInUserByPassword($result, $password): User
+    public function getLoggedInUserByPassword($result, $password): ?User
     {
         $user = $this->getUser($result);
         if ($user->logInUser($password) === false) {
-            throw new \Exception('Wrong password, try again!');
+            return null;
         }
 
         return $user;

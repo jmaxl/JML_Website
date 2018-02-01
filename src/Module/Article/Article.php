@@ -145,8 +145,15 @@ class Article
         return $this->pictureList;
     }
 
-    public function getTeaserPicture()
+    /**
+     * @return Picture|null
+     */
+    public function getTeaserPicture(): ?Picture
     {
+        if (reset($this->pictureList) === false){
+            return null;
+        }
+
         return reset($this->pictureList);
     }
 

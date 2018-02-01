@@ -389,9 +389,16 @@ template {
 [hidden] {
   display: none;
 }
-h1 {
-  background-color: #ffffff;
-}
 .articles-container {
   display: flex;
+}
+.articles-container img {
+  width: 100%;
+}
+.articles-container .article-container {
+  color: #000000;
+  width: 300px;
+}
+.articles-container .article-container .article-content p {
+  color: green;
 }

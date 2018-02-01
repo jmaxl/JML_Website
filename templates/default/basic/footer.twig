@@ -1,5 +1,8 @@
 <footer>
-    <p>&copy; JML 2017</p>
+    <p>&copy; JML 2018</p>
+    {% if loggedInUser is defined%}
+        <p>Halle {{ loggedInUser.getFirstname }}</p>
+    {% endif %}
 </footer>
 </body>
 </html>

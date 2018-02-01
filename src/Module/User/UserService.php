@@ -35,15 +35,27 @@ class UserService
      * @return User
      * @throws \Exception
      */
-    public function getLoggedInUserByMail(Mail $mail, $password): User
+    public function getLoggedInUserByMail(Mail $mail, $password): ?User
     {
         $result = $this->userRepository->getUserByMail($mail);
 
         if (count($result) !== 1) {
-            throw new \Exception('Mail not found!');
+            return null;
         }
 
         return $this->userFactory->getLoggedInUserByPassword($result, $password);
+    }
+
+    public function getLoggedInUserByUserId(Id $userId): ?User
+    {
+        $user = $this->getUserById($userId);
+        if ($user === null){
+            return null;
+        }
+        if ($user->logInBySession() === true){
+            return $user;
+        }
+        return null;
     }
 
     /**
@@ -51,12 +63,12 @@ class UserService
      * @return User
      * @throws \Exception
      */
-    public function getUserById(Id $id): User
+    public function getUserById(Id $id): ?User
     {
         $result = $this->userRepository->getUserById($id);
 
         if (count($result) !== 1) {
-            throw new \Exception('User not found!');
+            return null;
         }
 
         return $this->userFactory->getUser($result);

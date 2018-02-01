@@ -6,7 +6,7 @@ return [
     ],
     'template' => [
         'name' => 'default',
-        'dir' =>  '/default',
+        'dir' => '/default',
         'cacheDir' => '/cache'
     ],
     'database' => [
@@ -23,9 +23,21 @@ return [
             'controller' => 'IndexController',
             'action' => 'indexAction'
         ],
+        'logIn' => [
+            'controller' => 'IndexController',
+            'action' => 'logInAction'
+        ],
+        'logInRedirect' => [
+            'controller' => 'IndexController',
+            'action' => 'logInRedirectAction'
+        ],
         'impressum' => [
             'controller' => 'IndexController',
             'action' => 'impressumAction',
+        ],
+        'backend' => [
+            'controller' => 'BackendController',
+            'action' =>'backendAction',
         ]
     ]
 ];

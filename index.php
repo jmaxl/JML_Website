@@ -6,6 +6,8 @@ namespace JML;
 use JML\Controller\IndexController;
 use JML\Utilities\Tools;
 
+session_start();
+
 define('ROOT_PATH', getcwd());
 
 require ROOT_PATH . '/vendor/autoload.php';

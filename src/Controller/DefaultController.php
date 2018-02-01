@@ -5,6 +5,9 @@ namespace JML\Controller;
 
 use JML\Configuration;
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Id;
+use JML\Module\User\UserService;
+use JML\Utilities\Tools;
 use JML\View\ViewRenderer;
 
 /**
@@ -22,6 +25,10 @@ class DefaultController
     /** @var Database $database */
     protected $database;
 
+    protected $userService;
+
+    protected $loggedInUser;
+
     /**
      * DefaultController constructor.
      * @param Configuration $configuration
@@ -31,6 +38,12 @@ class DefaultController
         $this->configuration = $configuration;
         $this->viewRenderer = new ViewRenderer($this->configuration);
         $this->database = new Database($this->configuration);
+        $this->userService = new UserService($this->database);
+
+        if (Tools::getValue('userId') !== false){
+            $userId = Id::fromString(Tools::getValue('userId'));
+        $this->loggedInUser = $this->userService->getLoggedInUserByUserId($userId);
+        }
 
         $this->setDefaultViewConfig();
     }
@@ -58,6 +71,10 @@ class DefaultController
      */
     protected function setDefaultViewConfig(): void
     {
+        if ($this->loggedInUser !== null){
+            $this->viewRenderer->addViewConfig('loggedInUser', $this->loggedInUser);
+
+        }
         $this->viewRenderer->addViewConfig('page', 'notfound');
     }
 
