@@ -5,6 +5,7 @@ declare (strict_types=1);
 namespace JML\Controller;
 
 use JML\Configuration;
+use JML\Module\Article\ArticleService;
 use JML\Routing;
 
 class BackendController extends DefaultController
@@ -19,7 +20,12 @@ class BackendController extends DefaultController
 
     public function backendAction(): void
     {
+        $articleService = new ArticleService($this->database);
+        $articles = $articleService->getAllArticleOrderByDate();
 
+        $this->viewRenderer->addViewConfig('articles', $articles);
+        $this->viewRenderer->addViewConfig('page', 'backend');
+        $this->viewRenderer->renderTemplate();
     }
 
 }
