@@ -9,7 +9,7 @@ namespace JML\Module\GenericValueObject;
  */
 class Text
 {
-    const MIN_TEXT_LENGTH = 50;
+    const MIN_TEXT_LENGTH = 5;
 
     /** @var string $text */
     protected $text;

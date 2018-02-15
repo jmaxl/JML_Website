@@ -6,7 +6,9 @@ namespace JML\Controller;
 
 use JML\Configuration;
 use JML\Module\Article\ArticleService;
+use JML\Module\Author\AuthorService;
 use JML\Routing;
+use JML\Utilities\Tools;
 
 class BackendController extends DefaultController
 {
@@ -15,7 +17,9 @@ class BackendController extends DefaultController
         parent::__construct($configuration);
         if ($this->loggedInUser === null){
             $this->showStandardPage(Routing::ERROR_ROUTE);
+            exit;
         }
+
     }
 
     public function backendAction(): void
@@ -23,9 +27,25 @@ class BackendController extends DefaultController
         $articleService = new ArticleService($this->database);
         $articles = $articleService->getAllArticleOrderByDate();
 
+        $authorService = new AuthorService($this->database);
+        $authorList = $authorService->getAuthorList();
+
         $this->viewRenderer->addViewConfig('articles', $articles);
+        $this->viewRenderer->addViewConfig('authorList', $authorList);
         $this->viewRenderer->addViewConfig('page', 'backend');
         $this->viewRenderer->renderTemplate();
+    }
+
+    public function createArticleAction():  void
+    {
+        $articleService = new ArticleService($this->database);
+        $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId());
+        if($article === null){
+            header('Location: ' . Tools::getRouteUrl('backend'));
+            exit;
+        }
+        $articleService->safeArticleToDatabase($article);
+        header('Location: ' . Tools::getRouteUrl('backend'));
     }
 
 }

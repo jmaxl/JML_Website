@@ -38,6 +38,10 @@ return [
         'backend' => [
             'controller' => 'BackendController',
             'action' =>'backendAction',
+        ],
+        'createArticle' => [
+            'controller' => 'BackendController',
+            'action' => 'createArticleAction',
         ]
     ]
 ];

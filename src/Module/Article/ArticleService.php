@@ -5,6 +5,7 @@ namespace JML\Module\Article;
 
 use JML\Module\Author\AuthorService;
 use JML\Module\Database\Database;
+use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\Picture\PictureService;
 
@@ -63,5 +64,31 @@ class ArticleService
             $articles[] = $article;
         }
         return $articles;
+    }
+
+    public function getArticleByParams(array $params, Id $userId = null): ?Article
+    {
+        $object = (object)$params;
+        if (empty($object->articleId)) {
+            $object->articleId = Id::generateId()->toString();
+        }
+        if (empty($object->created)) {
+            $object->created = Datetime::fromValue("now")->toString();
+        }
+        if (empty($object->userId)) {
+            if ($userId === null) {
+                return null;
+            }
+            $object->userId = $userId->toString();
+        }
+        if ($this->articleFactory->isObjectValid($object) === false){
+            return null;
+        }
+        return $this->articleFactory->getArticle($object);
+    }
+
+    public function safeArticleToDatabase(Article $article): bool
+    {
+        return $this->articleRepository->safeArticleToDatabase($article);
     }
 }

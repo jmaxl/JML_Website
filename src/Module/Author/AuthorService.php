@@ -51,4 +51,8 @@ class AuthorService
         return $this->authorFactory->getAuthor($result);
     }
 
+    public function getAuthorList(): array
+    {
+        return $this->authorRepository->getAuthorList();
+    }
 }

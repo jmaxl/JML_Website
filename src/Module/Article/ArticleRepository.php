@@ -51,4 +51,17 @@ class ArticleRepository
         return $this->database->fetchAll($query);
     }
 
+    public function safeArticleToDatabase(Article $article): bool
+    {
+        $query = $this->database->getNewInsertQuery(self::TABLE);
+        $query->insert('articleId', $article->getArticleId()->toString());
+        $query->insert('title', $article->getTitle()->getTitle());
+        $query->insert('text', $article->getText()->getText());
+        $query->insert('subtitle', $article->getSubtitle()->getTitle());
+        $query->insert('userId', $article->getUserId()->toString());
+        $query->insert('created', $article->getCreated()->toString());
+
+        return $this->database->execute($query);
+    }
+
 }

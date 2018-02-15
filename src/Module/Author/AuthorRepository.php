@@ -50,4 +50,12 @@ class AuthorRepository
 
         return $this->database->fetch($query);
     }
+
+    public function getAuthorList(): array
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->orderBy('name', 'DESC');
+
+        return $this->database->fetchAll($query);
+    }
 }

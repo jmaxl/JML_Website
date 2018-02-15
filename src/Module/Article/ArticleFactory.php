@@ -40,4 +40,14 @@ class ArticleFactory
 
         return $article;
     }
+
+    public function isObjectValid($object): bool
+    {
+        try {
+            $this->getArticle($object);
+        } catch(\InvalidArgumentException $error){
+            return false;
+        }
+        return true;
+    }
 }
