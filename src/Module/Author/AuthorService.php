@@ -53,6 +53,20 @@ class AuthorService
 
     public function getAuthorList(): array
     {
-        return $this->authorRepository->getAuthorList();
+        $authorList = [];
+        $result = $this->authorRepository->getAuthorList();
+
+        foreach ( $result as $authorData){
+
+            $author = $this->authorFactory->getAuthor($authorData);
+            $authorList[] = $author;
+        }
+        return $authorList;
     }
+
+    public function deleteAuthorInDatabase(Author $author): bool
+    {
+        return $this->authorRepository->deleteAuthorInDatabase($author);
+    }
+
 }

@@ -2,26 +2,14 @@
     <form action="index.php?route=createArticle" method="post" enctype="multipart/form-data">
         Überschrift<input type="text" name="title">
         Teaser<input type="text" name="subtitle">
-        Autor<select name="author">
-
-            <option value="value1">Eintrag 1</option>
-            <option value="value2">Eintrag 2</option>
+        Autor<select multiple name="author[]">
+            {% for author in authorList %}
+               <option value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
+            {% endfor %}
         </select>
         Text<input type="text" name="text">
         Bild<input type="file" name="picture">
         <input type="submit" name="submit" value="Erstellen">
     </form>
-
     {% include 'module/articlesBackend.twig' %}
 </div>
-
-
-{% if authorList|length > 0 %}
-    <div class="article-backend-container">
-        {% for author in authorList %}
-            {{ authorList.getFirstname }} {{ authorList.getName }}
-        {% endfor %}
-    </div>
-{% else %}
-    Es gibt noch keine Artikel.
-{% endif %}

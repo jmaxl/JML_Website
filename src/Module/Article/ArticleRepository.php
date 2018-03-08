@@ -3,7 +3,9 @@ declare (strict_types=1);
 
 namespace JML\Module\Article;
 
+use JML\Module\Author\Author;
 use JML\Module\Database\Database;
+use JML\Module\Database\Query;
 use JML\Module\GenericValueObject\Id;
 
 /**
@@ -33,7 +35,7 @@ class ArticleRepository
     public function getAllArticleByDate(): array
     {
         $query = $this->database->getNewSelectQuery(self::TABLE);
-        $query->orderBy('created', 'DESC');
+        $query->orderBy('created', Query::DESC);
 
         return $this->database->fetchAll($query);
     }
@@ -64,4 +66,27 @@ class ArticleRepository
         return $this->database->execute($query);
     }
 
+    public function safeAuthorToAuthorArticleTable(Author $author, Id $articleId): bool
+    {
+        $query = $this->database->getNewInsertQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query->insert('id', Id::generateId()->toString());
+        $query->insert('articleId', $articleId->toString());
+        $query->insert('authorId', $author->getAuthorId()->toString());
+
+        return $this->database->execute($query);
+    }
+
+    public function getArticleById(Id $articleId)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->where('articleId', '=', $articleId->toString());
+        return $this->database->fetch($query);
+    }
+
+    public function deleteArticleInDatabase(Article $article): bool
+    {
+        $query = $this->database->getNewDeleteQuery(self::TABLE);
+        $query->where('articleId', '=', $article->getArticleId()->toString());
+        return $this->database->execute($query);
+    }
 }

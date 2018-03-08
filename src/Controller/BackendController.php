@@ -7,6 +7,7 @@ namespace JML\Controller;
 use JML\Configuration;
 use JML\Module\Article\ArticleService;
 use JML\Module\Author\AuthorService;
+use JML\Module\GenericValueObject\Id;
 use JML\Routing;
 use JML\Utilities\Tools;
 
@@ -45,6 +46,24 @@ class BackendController extends DefaultController
             exit;
         }
         $articleService->safeArticleToDatabase($article);
+        header('Location: ' . Tools::getRouteUrl('backend'));
+    }
+
+    public function deleteArticleAction()
+    {
+        $articleService = new ArticleService($this->database);
+        $article = $articleService->getArticleById(Id::fromString(Tools::getValue('articleId')));
+
+        $articleService->deleteArticleInDatabase($article);
+        header('Location: ' . Tools::getRouteUrl('backend'));
+    }
+
+    public function deleteAuthorAction()
+    {
+        $authorService = new AuthorService(($this->database));
+        $author = $authorService->getAuthorByAuthorId(Id::fromString(Tools::getValue('authorId')));
+
+        $authorService->deleteAuthorInDatabase($author);
         header('Location: ' . Tools::getRouteUrl('backend'));
     }
 

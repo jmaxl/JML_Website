@@ -69,6 +69,7 @@ class ArticleService
     public function getArticleByParams(array $params, Id $userId = null): ?Article
     {
         $object = (object)$params;
+
         if (empty($object->articleId)) {
             $object->articleId = Id::generateId()->toString();
         }
@@ -84,11 +85,40 @@ class ArticleService
         if ($this->articleFactory->isObjectValid($object) === false){
             return null;
         }
-        return $this->articleFactory->getArticle($object);
+        $article =  $this->articleFactory->getArticle($object);
+        if ($article === null){
+            return null;
+        }
+        foreach ($object->author as $authorData){
+            $author = $this->authorService->getAuthorByAuthorId(Id::fromString($authorData));
+            $article->addAuthorToAuthorList($author);
+        }
+        return $article;
     }
 
     public function safeArticleToDatabase(Article $article): bool
     {
-        return $this->articleRepository->safeArticleToDatabase($article);
+        if ($this->articleRepository->safeArticleToDatabase($article) === false){
+            return false;
+        }
+        $authorList = $article->getAuthorList();
+        foreach ($authorList as $author){
+            if ($this->articleRepository->safeAuthorToAuthorArticleTable($author, $article->getArticleId()) === false){
+                throw new \Exception('Da ist etwas schief gegangen!');
+            }
+        }
+        return true;
     }
+
+    public function getArticleById(Id $articleId): Article
+    {
+        $article = $this->articleRepository->getArticleById($articleId);
+        return $this->articleFactory->getArticle($article);
+    }
+
+    public function deleteArticleInDatabase(Article $article): bool
+    {
+        return $this->articleRepository->deleteArticleInDatabase($article);
+    }
+
 }

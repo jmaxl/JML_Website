@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML\Module\Author;
 
 use JML\Module\Database\Database;
+use JML\Module\Database\Query;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
 
@@ -14,6 +15,7 @@ use JML\Module\GenericValueObject\Name;
 class AuthorRepository
 {
     const TABLE = 'author';
+    const TABLE_ARTICLE_AUTHOR = 'article_author';
 
     /** @var Database $database */
     protected $database;
@@ -54,8 +56,15 @@ class AuthorRepository
     public function getAuthorList(): array
     {
         $query = $this->database->getNewSelectQuery(self::TABLE);
-        $query->orderBy('name', 'DESC');
+        $query->orderBy('name', Query::ASC);
 
         return $this->database->fetchAll($query);
+    }
+
+    public function deleteAuthorInDatabase(Author $author): bool
+    {
+        $query = $this->database->getNewDeleteQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query->where('authorId', '=', $author->getAuthorId()->toString());
+        return $this->database->execute($query);
     }
 }

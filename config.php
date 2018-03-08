@@ -42,6 +42,10 @@ return [
         'createArticle' => [
             'controller' => 'BackendController',
             'action' => 'createArticleAction',
+        ],
+        'deleteArticle' => [
+            'controller' => 'BackendController',
+            'action' => 'deleteArticleAction',
         ]
     ]
 ];
