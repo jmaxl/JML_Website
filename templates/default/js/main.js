@@ -16,7 +16,6 @@ $(document).on('click', '.js-edit-article', function () {
         },
         success: function (response){
             if (response.status === 'success'){
-                debugger;
                 $('.js-edit-article-container').html(response.view);
             }
         }

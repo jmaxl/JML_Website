@@ -4,7 +4,7 @@
         Teaser<input type="text" name="subtitle" value="{{ article.getSubtitle }}">
         Autor<select multiple name="author[]">
             {% for author in authorList %}
-                <option {% if author.getAutorId.toString in article.getAuthorList|keys %} selected {% endif %}
+                <option {% if author.getAuthorId.toString in article.getAuthorList|keys %} selected {% endif %}
                         value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
             {% endfor %}
         </select>

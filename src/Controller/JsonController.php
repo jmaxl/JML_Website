@@ -36,20 +36,13 @@ class JsonController extends DefaultController
     {
         $articleService = new ArticleService($this->database);
         $article = $articleService->getFullArticleById(Id::fromString(Tools::getValue('articleId')));
-
-
         $this->viewRenderer->addViewConfig('article', $article);
 
         $authorService = new AuthorService($this->database);
         $authorList = $authorService->getAuthorList();
-
         $this->viewRenderer->addViewConfig('authorList', $authorList);
 
-
         $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
-        $this->jsonModel->addJsonConfig('authorList', $article->getAuthorList());
-
-
         $this->jsonModel->send();
     }
 }
