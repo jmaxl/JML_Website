@@ -123,4 +123,22 @@ class ArticleService
         }
         return false;
     }
+
+    public function getFullArticleById(Id $articleId): ?Article
+    {
+        $article = $this->getArticleById($articleId);
+        $authorIds = $this->articleRepository->getAllAuthorIdsByArticleId($article->getArticleId());
+
+        foreach ($authorIds as $authorId) {
+            $authorId = Id::fromString($authorId->authorId);
+            $author = $this->authorService->getAuthorByAuthorId($authorId);
+            $article->addAuthorToAuthorList($author);
+        }
+        $pictures = $this->pictureService->getAllPicturesByArticleId($article->getArticleId());
+
+        foreach ($pictures as $picture) {
+            $article->addPictureToPictureList($picture);
+        }
+        return $article;
+    }
 }

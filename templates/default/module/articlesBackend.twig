@@ -11,8 +11,8 @@
                             {% endfor %}
                         </td>
                         <td>{{ article.getCreated }}</td>
-                        <td><input type="submit" name="submit" value="Bearbeiten"></td>
-                        <td><a href="index.php?route=deleteArticle&articleId={{ article.getArticleId }}">Löschen</a></td>
+                        <td><input type="button" name="submit" class="js-edit-article" data-article-id="{{ article.getArticleId }}" value="Bearbeiten"></td>
+                        <td><a href="index.php?route=deleteArticle&articleId={{ article.getArticleId }}" class="js-delete-article">Löschen</a></td>
                     </tr>
                 {% endfor %}
             </table>

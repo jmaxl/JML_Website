@@ -5,6 +5,9 @@ namespace JML\Controller;
 
 use JML\Configuration;
 
+use JML\Module\Article\ArticleService;
+use JML\Module\Author\AuthorService;
+use JML\Module\GenericValueObject\Id;
 use JML\Utilities\Tools;
 use JML\View\JsonModel;
 
@@ -29,10 +32,23 @@ class JsonController extends DefaultController
         $this->jsonModel = new JsonModel();
     }
 
-    public function testAction()
+    public function editArticleAction()
     {
+        $articleService = new ArticleService($this->database);
+        $article = $articleService->getFullArticleById(Id::fromString(Tools::getValue('articleId')));
 
-        $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('page/home.twig'));
+
+        $this->viewRenderer->addViewConfig('article', $article);
+
+        $authorService = new AuthorService($this->database);
+        $authorList = $authorService->getAuthorList();
+
+        $this->viewRenderer->addViewConfig('authorList', $authorList);
+
+
+        $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
+        $this->jsonModel->addJsonConfig('authorList', $article->getAuthorList());
+
 
         $this->jsonModel->send();
     }

@@ -46,6 +46,10 @@ return [
         'deleteArticle' => [
             'controller' => 'BackendController',
             'action' => 'deleteArticleAction',
+        ],
+        'editArticle' => [
+            'controller' => 'JsonController',
+            'action' => 'editArticleAction',
         ]
     ]
 ];
