@@ -82,14 +82,14 @@ class ArticleService
             }
             $object->userId = $userId->toString();
         }
-        if ($this->articleFactory->isObjectValid($object) === false){
+        if ($this->articleFactory->isObjectValid($object) === false) {
             return null;
         }
-        $article =  $this->articleFactory->getArticle($object);
-        if ($article === null){
+        $article = $this->articleFactory->getArticle($object);
+        if ($article === null) {
             return null;
         }
-        foreach ($object->author as $authorData){
+        foreach ($object->author as $authorData) {
             $author = $this->authorService->getAuthorByAuthorId(Id::fromString($authorData));
             $article->addAuthorToAuthorList($author);
         }
@@ -98,12 +98,12 @@ class ArticleService
 
     public function safeArticleToDatabase(Article $article): bool
     {
-        if ($this->articleRepository->safeArticleToDatabase($article) === false){
+        if ($this->articleRepository->safeArticleToDatabase($article) === false) {
             return false;
         }
         $authorList = $article->getAuthorList();
-        foreach ($authorList as $author){
-            if ($this->articleRepository->safeAuthorToAuthorArticleTable($author, $article->getArticleId()) === false){
+        foreach ($authorList as $author) {
+            if ($this->articleRepository->safeAuthorToAuthorArticleTable($author, $article->getArticleId()) === false) {
                 throw new \Exception('Da ist etwas schief gegangen!');
             }
         }
@@ -118,7 +118,9 @@ class ArticleService
 
     public function deleteArticleInDatabase(Article $article): bool
     {
-        return $this->articleRepository->deleteArticleInDatabase($article);
+        if ($this->articleRepository->deleteArticleInDatabase($article) === true) {
+            return $this->articleRepository->deleteAuthorArticleInDatabase($article);
+        }
+        return false;
     }
-
 }

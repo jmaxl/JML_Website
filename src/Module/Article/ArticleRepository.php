@@ -89,4 +89,11 @@ class ArticleRepository
         $query->where('articleId', '=', $article->getArticleId()->toString());
         return $this->database->execute($query);
     }
+
+    public function deleteAuthorArticleInDatabase(Article $article): bool
+    {
+        $query = $this->database->getNewDeleteQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query->where('articleId', '=', $article->getArticleId()->toString());
+        return $this->database->execute($query);
+    }
 }

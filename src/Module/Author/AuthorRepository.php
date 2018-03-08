@@ -63,7 +63,7 @@ class AuthorRepository
 
     public function deleteAuthorInDatabase(Author $author): bool
     {
-        $query = $this->database->getNewDeleteQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query = $this->database->getNewDeleteQuery(self::TABLE);
         $query->where('authorId', '=', $author->getAuthorId()->toString());
         return $this->database->execute($query);
     }
