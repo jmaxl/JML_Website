@@ -6,6 +6,7 @@ namespace JML\Module\Picture;
 
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Image;
 
 class PictureService
 {
@@ -37,6 +38,13 @@ class PictureService
             $pictureArray[] = $picture;
         }
         return $pictureArray;
+    }
+
+    public function createPictureByUploadedImage(array $uploadedFile, Id $userId): ?Picture
+    {
+        $pictureUrl = Image::fromUploadWithSave($uploadedFile);
+        $picture = $this->pictureFactory->createNewPicture($pictureUrl, $userId);
+        return $picture;
     }
 
 

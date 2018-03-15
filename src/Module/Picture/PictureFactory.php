@@ -6,6 +6,7 @@ namespace JML\Module\Picture;
 
 use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Image;
 use JML\Module\GenericValueObject\Link;
 use JML\Module\GenericValueObject\Title;
 
@@ -22,7 +23,7 @@ class PictureFactory
     public function getPicture($pictureData): Picture
     {
         $pictureId = Id::fromString($pictureData->pictureId);
-        $pictureUrl = $pictureData->pictureUrl;
+        $pictureUrl = Image::fromFile($pictureData->pictureUrl);
         $userId = Id::fromString($pictureData->userId);
         $created = Datetime::fromValue($pictureData->created);
 
@@ -38,6 +39,14 @@ class PictureFactory
             $picture->setAuthorId($authorId);
         }
 
+        return $picture;
+    }
+
+    public function createNewPicture(Image $pictureUrl, Id $userId): Picture
+    {
+        $pictureId = Id::generateId();
+        $created = Datetime::fromValue('now');
+        $picture = new Picture($pictureId, $pictureUrl, $userId, $created);
         return $picture;
     }
 }

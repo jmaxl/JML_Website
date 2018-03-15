@@ -5,6 +5,7 @@ namespace JML\Module\Picture;
 
 use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\GenericValueObject\Image;
 use JML\Module\GenericValueObject\Link;
 use JML\Module\GenericValueObject\Title;
 
@@ -20,7 +21,7 @@ class Picture
     /** @var  Title $title */
     protected $title;
 
-    /** @var string $pictureUrl */
+    /** @var Image $pictureUrl */
     protected $pictureUrl;
 
     /** @var  Id $authorId */
@@ -32,7 +33,7 @@ class Picture
     /** @var  Datetime $created */
     protected $created;
 
-    public function __construct(Id $pictureId, string $pictureUrl, Id $userId, Datetime $created)
+    public function __construct(Id $pictureId, Image $pictureUrl, Id $userId, Datetime $created)
     {
         $this->pictureId = $pictureId;
         $this->pictureUrl = $pictureUrl;
@@ -65,17 +66,17 @@ class Picture
     }
 
     /**
-     * @return string
+     * @return Image
      */
-        public function getPictureUrl(): string
+        public function getPictureUrl(): Image
     {
         return $this->pictureUrl;
     }
 
     /**
-     * @param string $pictureUrl
+     * @param Image $pictureUrl
      */
-    public function setPictureUrl(string $pictureUrl)
+    public function setPictureUrl(Image $pictureUrl)
     {
         $this->pictureUrl = $pictureUrl;
     }

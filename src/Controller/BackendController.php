@@ -8,6 +8,7 @@ use JML\Configuration;
 use JML\Module\Article\ArticleService;
 use JML\Module\Author\AuthorService;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\Picture\PictureService;
 use JML\Routing;
 use JML\Utilities\Tools;
 
@@ -39,8 +40,16 @@ class BackendController extends DefaultController
 
     public function createArticleAction():  void
     {
+        $picture = null;
+        $pictureService = new PictureService($this->database);
+        if(empty($_FILES) === false) {
+            $picture = $pictureService->createPictureByUploadedImage($_FILES, $this->loggedInUser->getUserId());
+            var_dump($picture);
+            exit;
+
+        }
         $articleService = new ArticleService($this->database);
-        $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId());
+        $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId(), $picture);
         if($article === null){
             header('Location: ' . Tools::getRouteUrl('backend'));
             exit;
