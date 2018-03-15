@@ -42,12 +42,11 @@ class BackendController extends DefaultController
     {
         $picture = null;
         $pictureService = new PictureService($this->database);
-        if(empty($_FILES) === false) {
-            $picture = $pictureService->createPictureByUploadedImage($_FILES, $this->loggedInUser->getUserId());
-            var_dump($picture);
-            exit;
 
+        if(empty($_FILES) === false) {
+            $picture = $pictureService->createPictureByUploadedImage($_FILES['picture'], $this->loggedInUser->getUserId());
         }
+
         $articleService = new ArticleService($this->database);
         $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId(), $picture);
         if($article === null){
