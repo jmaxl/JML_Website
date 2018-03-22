@@ -46,4 +46,41 @@ class PictureRepository
 
         return $this->database->fetch($query);
     }
+
+    public function savePictureToDatabase(Picture $picture): bool
+    {
+        if (empty($this->getPictureByPictureId($picture->getPictureId())) === true) {
+            $query = $this->database->getNewInsertQuery(self::TABLE_PICTURE);
+            $query->insert('pictureId', $picture->getPictureId()->toString());
+            $query->insert('pictureUrl', $picture->getPictureUrl()->toString());
+            $query->insert('userId', $picture->getUserId()->toString());
+            $query->insert('created', $picture->getCreated()->toString());
+
+            if($picture->getTitle() !== null) {
+                $query->insert('title', $picture->getTitle()->getTitle());
+            }
+
+            if($picture->getAuthorId() !== null) {
+                $query->insert('authorId', $picture->getAuthorId()->toString());
+            }
+
+            return $this->database->execute($query);
+        }
+
+        $query = $this->database->getNewUpdateQuery(self::TABLE_PICTURE);
+        $query->set('pictureUrl', $picture->getPictureUrl()->toString());
+        $query->set('userId', $picture->getUserId()->toString());
+        $query->set('created', $picture->getCreated()->toString());
+        $query->where('pictureId', '=', $picture->getPictureId()->toString());
+
+        if($picture->getTitle() !== null) {
+            $query->set('title', $picture->getTitle()->getTitle());
+        }
+
+        if($picture->getAuthorId() !== null) {
+            $query->set('authorId', $picture->getAuthorId()->toString());
+        }
+
+        return $this->database->execute($query);
+    }
 }

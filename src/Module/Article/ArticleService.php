@@ -7,6 +7,7 @@ use JML\Module\Author\AuthorService;
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\Picture\Picture;
 use JML\Module\Picture\PictureService;
 
 /**
@@ -66,7 +67,7 @@ class ArticleService
         return $articles;
     }
 
-    public function getArticleByParams(array $params, Id $userId = null): ?Article
+    public function getArticleByParams(array $params, Id $userId = null, Picture $picture = null): ?Article
     {
         $object = (object)$params;
 
@@ -93,6 +94,10 @@ class ArticleService
             $author = $this->authorService->getAuthorByAuthorId(Id::fromString($authorData));
             $article->addAuthorToAuthorList($author);
         }
+        if ($picture !== null){
+            $article->addPictureToPictureList($picture);
+        }
+
         return $article;
     }
 
@@ -107,6 +112,15 @@ class ArticleService
                 throw new \Exception('Da ist etwas schief gegangen!');
             }
         }
+        $pictureList = $article->getPictureList();
+        foreach ($pictureList as $picture){
+            if($this->pictureService->savePictureToDatabase($picture) === true){
+                if($this->articleRepository->savePictureToPictureArticleTable($picture, $article->getArticleId()) === false) {
+                    throw new \Exception('Da ist etwas schief gegangen!');
+                }
+            }
+        }
+
         return true;
     }
 

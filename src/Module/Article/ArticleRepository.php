@@ -7,6 +7,7 @@ use JML\Module\Author\Author;
 use JML\Module\Database\Database;
 use JML\Module\Database\Query;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\Picture\Picture;
 
 /**
  * Class ArticleRepository
@@ -16,6 +17,8 @@ class ArticleRepository
 {
     const TABLE = 'article';
     const TABLE_ARTICLE_AUTHOR = 'article_author';
+    const TABLE_ARTICLE_PICTURE = 'article_picture';
+
 
     /** @var Database $database */
     protected $database;
@@ -55,25 +58,40 @@ class ArticleRepository
 
     public function safeArticleToDatabase(Article $article): bool
     {
-        $query = $this->database->getNewInsertQuery(self::TABLE);
-        $query->insert('articleId', $article->getArticleId()->toString());
-        $query->insert('title', $article->getTitle()->getTitle());
-        $query->insert('text', $article->getText()->getText());
-        $query->insert('subtitle', $article->getSubtitle()->getTitle());
-        $query->insert('userId', $article->getUserId()->toString());
-        $query->insert('created', $article->getCreated()->toString());
+        if (empty($this->getArticleById($article->getArticleId())) === true) {
+            $query = $this->database->getNewInsertQuery(self::TABLE);
+            $query->insert('articleId', $article->getArticleId()->toString());
+            $query->insert('title', $article->getTitle()->getTitle());
+            $query->insert('text', $article->getText()->getText());
+            $query->insert('subtitle', $article->getSubtitle()->getTitle());
+            $query->insert('userId', $article->getUserId()->toString());
+            $query->insert('created', $article->getCreated()->toString());
+
+            return $this->database->execute($query);
+        }
+        $query = $this->database->getNewUpdateQuery(self::TABLE);
+        $query->where('articleId', '=', $article->getArticleId()->toString());
+        $query->set('title', $article->getTitle()->getTitle());
+        $query->set('text', $article->getText()->getText());
+        $query->set('subtitle', $article->getSubtitle()->getTitle());
+        $query->set('userId', $article->getUserId()->toString());
+        $query->set('created', $article->getCreated()->toString());
 
         return $this->database->execute($query);
+
     }
 
     public function safeAuthorToAuthorArticleTable(Author $author, Id $articleId): bool
     {
-        $query = $this->database->getNewInsertQuery(self::TABLE_ARTICLE_AUTHOR);
-        $query->insert('id', Id::generateId()->toString());
-        $query->insert('articleId', $articleId->toString());
-        $query->insert('authorId', $author->getAuthorId()->toString());
+        if(empty($this->getAuthorArticleByAuthorAndArticleId($author, $articleId)) === true) {
+            $query = $this->database->getNewInsertQuery(self::TABLE_ARTICLE_AUTHOR);
+            $query->insert('id', Id::generateId()->toString());
+            $query->insert('articleId', $articleId->toString());
+            $query->insert('authorId', $author->getAuthorId()->toString());
 
-        return $this->database->execute($query);
+            return $this->database->execute($query);
+        }
+        return true;
     }
 
     public function getArticleById(Id $articleId)
@@ -95,5 +113,33 @@ class ArticleRepository
         $query = $this->database->getNewDeleteQuery(self::TABLE_ARTICLE_AUTHOR);
         $query->where('articleId', '=', $article->getArticleId()->toString());
         return $this->database->execute($query);
+    }
+
+    public function savePictureToPictureArticleTable(Picture $picture, Id $articleId): bool
+    {
+        if(empty($this->getPictureArticleByPictureAndArticleId($picture, $articleId)) === true){
+            $query = $this->database->getNewInsertQuery(self::TABLE_ARTICLE_PICTURE);
+            $query->insert('id', Id::generateId()->toString());
+            $query->insert('articleId', $articleId->toString());
+            $query->insert('pictureId', $picture->getPictureId()->toString());
+
+            return $this->database->execute($query);
+        }
+    }
+
+    public function getAuthorArticleByAuthorAndArticleId(Author $author, Id $articleId)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE_ARTICLE_AUTHOR);
+        $query->where('authorId', '=', $author->getAuthorId()->toString());
+        $query->andWhere('articleId', '=', $articleId->toString());
+        return $this->database->fetch($query);
+    }
+
+    public function getPictureArticleByPictureAndArticleId(Picture $picture, Id $articleId)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE_ARTICLE_PICTURE);
+        $query->where('pictureId', '=', $picture->getPictureId()->toString());
+        $query->andWhere('articleId', '=', $articleId->toString());
+        return $this->database->fetch($query);
     }
 }

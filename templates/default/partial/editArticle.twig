@@ -11,5 +11,6 @@
         Text<input type="text" name="text" value="{{ article.getText }}">
         Bild<input type="file" name="picture">
         <input type="submit" name="submit" value="Bearbeiten">
+        <input type="hidden" name="articleId" value="{{ article.getArticleId }}">
     </form>
 {% endif %}

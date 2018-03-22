@@ -47,5 +47,10 @@ class PictureService
         return $picture;
     }
 
+    public function savePictureToDatabase(Picture $picture): bool
+    {
+        return $this->pictureRepository->savePictureToDatabase($picture);
+    }
+
 
 }

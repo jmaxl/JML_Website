@@ -52,7 +52,7 @@ class Picture
     /**
      * @return Title
      */
-    public function getTitle(): Title
+    public function getTitle(): ?Title
     {
         return $this->title;
     }
@@ -84,7 +84,7 @@ class Picture
     /**
      * @return Id
      */
-    public function getAuthorId(): Id
+    public function getAuthorId(): ?Id
     {
         return $this->authorId;
     }
