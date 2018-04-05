@@ -53,7 +53,7 @@ return [
         ],
         'submitEditArticle' => [
             'controller' => 'BackendController',
-            'action' => 'createEditArticleAction',
+            'action' => 'saveEditArticleAction',
         ]
     ]
 ];

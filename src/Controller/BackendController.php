@@ -75,8 +75,14 @@ class BackendController extends DefaultController
         header('Location: ' . Tools::getRouteUrl('backend'));
     }
 
-    public function createEditArticleAction():  void
+    public function saveEditArticleAction():  void
     {
+        $pictureService = new PictureService($this->database);
+
+        if(empty($_FILES) === false) {
+            $picture = $pictureService->createPictureByUploadedImage($_FILES['picture'], $this->loggedInUser->getUserId());
+        }
+
         $articleService = new ArticleService($this->database);
         $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId(), $picture);
         if($article === null){
