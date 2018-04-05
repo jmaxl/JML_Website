@@ -50,6 +50,10 @@ return [
         'editArticle' => [
             'controller' => 'JsonController',
             'action' => 'editArticleAction',
+        ],
+        'submitEditArticle' => [
+            'controller' => 'BackendController',
+            'action' => 'createEditArticleAction',
         ]
     ]
 ];

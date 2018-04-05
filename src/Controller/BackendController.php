@@ -75,4 +75,16 @@ class BackendController extends DefaultController
         header('Location: ' . Tools::getRouteUrl('backend'));
     }
 
+    public function createEditArticleAction():  void
+    {
+        $articleService = new ArticleService($this->database);
+        $article = $articleService->getArticleByParams($_POST, $this->loggedInUser->getUserId(), $picture);
+        if($article === null){
+            header('Location: ' . Tools::getRouteUrl('backend'));
+            exit;
+        }
+        $articleService->safeArticleToDatabase($article);
+        header('Location: ' . Tools::getRouteUrl('backend'));
+    }
+
 }
