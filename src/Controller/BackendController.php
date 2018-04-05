@@ -77,9 +77,10 @@ class BackendController extends DefaultController
 
     public function saveEditArticleAction():  void
     {
+        // $picture = null;
         $pictureService = new PictureService($this->database);
 
-        if(empty($_FILES) === false) {
+        if(isset($_FILES['picture']) === true && $_FILES['picture']['size'] > 0) {
             $picture = $pictureService->createPictureByUploadedImage($_FILES['picture'], $this->loggedInUser->getUserId());
         }
 
