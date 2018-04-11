@@ -45,4 +45,17 @@ class JsonController extends DefaultController
         $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
         $this->jsonModel->send();
     }
+
+    public function createAuthorAction()
+    {
+        $authorService = new AuthorService($this->database);
+        $author = $authorService->getAuthorByParams($_POST);
+        if ($author !== null) {
+            if ($authorService->saveAuthorToDatabase($author) === true) {
+                $this->jsonModel->addJsonConfig('author', $author);
+                $this->jsonModel->send();
+            }
+        }
+        $this->jsonModel->send('error');
+    }
 }

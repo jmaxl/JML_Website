@@ -6,7 +6,6 @@ namespace JML\Module\Picture;
 use JML\Module\GenericValueObject\Datetime;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Image;
-use JML\Module\GenericValueObject\Link;
 use JML\Module\GenericValueObject\Title;
 
 /**

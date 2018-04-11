@@ -32,8 +32,11 @@ class BackendController extends DefaultController
         $authorService = new AuthorService($this->database);
         $authorList = $authorService->getAuthorList();
 
+        $userList = $this->userService->getAllUser();
+
         $this->viewRenderer->addViewConfig('articles', $articles);
         $this->viewRenderer->addViewConfig('authorList', $authorList);
+        $this->viewRenderer->addViewConfig('userList', $userList);
         $this->viewRenderer->addViewConfig('page', 'backend');
         $this->viewRenderer->renderTemplate();
     }

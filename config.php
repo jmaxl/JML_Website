@@ -54,6 +54,10 @@ return [
         'submitEditArticle' => [
             'controller' => 'BackendController',
             'action' => 'saveEditArticleAction',
+        ],
+        'createAuthor' => [
+            'controller' => 'JsonController',
+            'action' => 'createAuthorAction',
         ]
     ]
 ];

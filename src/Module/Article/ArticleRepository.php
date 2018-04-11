@@ -125,6 +125,7 @@ class ArticleRepository
 
             return $this->database->execute($query);
         }
+        return false;
     }
 
     public function getAuthorArticleByAuthorAndArticleId(Author $author, Id $articleId)

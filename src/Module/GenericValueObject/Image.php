@@ -4,7 +4,6 @@ declare (strict_types=1);
 namespace JML\Module\GenericValueObject;
 
 use claviska\SimpleImage;
-use JML\Configuration;
 
 /**
  * Class Image
@@ -23,6 +22,8 @@ class Image
 
     /** @var string $imagePath */
     protected $imagePath;
+
+    protected $image;
 
     /**
      * Image constructor.

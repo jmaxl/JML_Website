@@ -45,7 +45,7 @@ class Author
     /**
      * @return Id
      */
-    public function getUserId(): Id
+    public function getUserId(): ?Id
     {
         return $this->userId;
     }
@@ -53,7 +53,7 @@ class Author
     /**
      * @return Name
      */
-    public function getFirstname(): Name
+    public function getFirstname(): ?Name
     {
         return $this->firstname;
     }
@@ -69,7 +69,7 @@ class Author
     /**
      * @return mixed
      */
-    public function getName(): Name
+    public function getName(): ?Name
     {
         return $this->name;
     }

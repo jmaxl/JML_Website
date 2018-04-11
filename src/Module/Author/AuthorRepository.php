@@ -67,4 +67,20 @@ class AuthorRepository
         $query->where('authorId', '=', $author->getAuthorId()->toString());
         return $this->database->execute($query);
     }
+
+    public function saveAuthorInDatabase(Author $author): bool
+    {
+        $query = $this->database->getNewInsertQuery(self::TABLE);
+        $query->insert('authorId', $author->getAuthorId()->toString());
+        if($author->getFirstname() !== null){
+            $query->insert('firstname', $author->getFirstname()->getName());
+        }
+        if($author->getName() !== null){
+            $query->insert('name', $author->getName()->getName());
+        }
+        if($author->getUserId() !== null){
+            $query->insert('userId', $author->getUserId()->toString());
+        }
+        return $this->database->execute($query);
+    }
 }

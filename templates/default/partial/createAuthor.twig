@@ -1,0 +1,16 @@
+<div class="create-article">
+    <form action="#" class="js-create-author-form" name="create-author-form">
+        {% if userList %}
+            Nutzer<select name="userId" class="js-user-id">
+            <option value="">Bitte wählen</option>
+            {% for user in userList %}
+                <option value="{{ user.getUserId }}">{{ user.getFirstname }} {{ user.getName }}</option>
+            {% endfor %}
+            </select>
+        {% endif %}
+        Vorname<input type="text" class="js-firstname"  name="firstname">
+        Nachname<input type="text" class="js-name" name="name">
+        <input type="submit" name="submit" class="js-create-author" value="Speichern">
+        <p class="js-error"></p>
+    </form>
+</div>

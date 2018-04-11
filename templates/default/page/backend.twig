@@ -1,4 +1,5 @@
 <div class="home-page js-home-page">
+    <div class="js-create-author-container hidden">{% include 'partial/createAuthor.twig' %}</div>
     <form action="index.php?route=createArticle" method="post" enctype="multipart/form-data">
         Überschrift<input type="text" name="title">
         Teaser<input type="text" name="subtitle">
@@ -7,6 +8,7 @@
                <option value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
             {% endfor %}
         </select>
+        <td><input type="button" name="create-author-button" class="js-create-author" value="Neuer Autor"></td>
         Text<input type="text" name="text">
         Bild<input type="file" name="picture">
         <input type="submit" name="submit" value="Erstellen">

@@ -1,14 +1,18 @@
 {% if article %}
     <form action="index.php?route=submitEditArticle" method="post" enctype="multipart/form-data">
-        Überschrift<input type="text" name="title" value="{{ article.getTitle }}">
-        Teaser<input type="text" name="subtitle" value="{{ article.getSubtitle }}">
-        Autor<select multiple name="author[]">
+        <label for="title">Überschrift</label>
+        <input type="text" name="title" id="title" value="{{ article.getTitle }}">
+        <label for="subtitle">Teaser</label>
+        <input type="text" id="subtitle" name="subtitle" value="{{ article.getSubtitle }}">
+        <label for="author">Autor</label>
+        <select multiple name="author[]" id="author">
             {% for author in authorList %}
                 <option {% if author.getAuthorId.toString in article.getAuthorList|keys %} selected {% endif %}
                         value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
             {% endfor %}
         </select>
-        Text<input type="text" name="text" value="{{ article.getText }}">
+        <label for="maintext">Text</label>
+        <input type="text" id="maintext" name="text" value="{{ article.getText }}">
         Bild<input type="file" name="picture">
         <input type="submit" name="submit" value="Bearbeiten">
         <input type="hidden" name="articleId" value="{{ article.getArticleId }}">

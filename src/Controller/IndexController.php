@@ -5,7 +5,6 @@ namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
 use JML\Module\GenericValueObject\Mail;
-use JML\Module\GenericValueObject\Password;
 use JML\Module\User\UserService;
 use JML\Utilities\Tools;
 

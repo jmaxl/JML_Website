@@ -70,4 +70,10 @@ class UserRepository
 
         return $this->database->execute($query);
     }
+
+    public function getAllUser(): array
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        return $this->database->fetchAll($query);
+    }
 }

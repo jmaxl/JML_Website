@@ -49,10 +49,10 @@ class UserService
     public function getLoggedInUserByUserId(Id $userId): ?User
     {
         $user = $this->getUserById($userId);
-        if ($user === null){
+        if ($user === null) {
             return null;
         }
-        if ($user->logInBySession() === true){
+        if ($user->logInBySession() === true) {
             return $user;
         }
         return null;
@@ -91,6 +91,18 @@ class UserService
         $user = $this->userFactory->getUser($fake);
 
         return $this->userRepository->saveUser($user);
+    }
+
+    public function getAllUser(): array
+    {
+        $user = [];
+        $result = $this->userRepository->getAllUser();
+
+        foreach ($result as $userData) {
+            $user[] = $this->userFactory->getUser($userData);
+        }
+
+        return $user;
     }
 }
 

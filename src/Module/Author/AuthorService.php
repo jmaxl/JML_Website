@@ -69,4 +69,20 @@ class AuthorService
         return $this->authorRepository->deleteAuthorInDatabase($author);
     }
 
+    public function getAuthorByParams(array $params): ?Author
+    {
+        $object = (object)$params;
+
+        if (empty($object->authorId)) {
+            $object->authorId = Id::generateId()->toString();
+        }
+
+        return $this->authorFactory->getAuthor($object);
+    }
+
+    public function saveAuthorToDatabase(Author $author): bool
+    {
+        return $this->authorRepository->saveAuthorInDatabase($author);
+    }
+
 }
