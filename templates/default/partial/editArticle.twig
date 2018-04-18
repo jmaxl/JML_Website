@@ -13,13 +13,12 @@
         </select>
         <label for="maintext">Text</label>
         <input type="text" id="maintext" name="text" value="{{ article.getText }}">
-        <label for="picture">Bild</label>
-        <select multiple name="picture[]" id="picture">
-            {% for picture in pictureList %}
-                <option {% if picture.getPictureId.toString in picture.getPictureList|keys %} selected {% endif %}
-                        value="{{ picture.getPictureId }}">{{ picture.getTitle }}</option>
-            {% endfor %}
-        </select>
+        {% for picture in pictureList %}
+            <div class="all-article-pictures">
+                {{ article.getTeaserPicture.getTitle }}
+                <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+            </div>
+        {% endfor %}
         <input type="file" name="picture">
         <input type="submit" name="submit" value="Bearbeiten">
         <input type="hidden" name="articleId" value="{{ article.getArticleId }}">
