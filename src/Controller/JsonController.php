@@ -8,6 +8,7 @@ use JML\Configuration;
 use JML\Module\Article\ArticleService;
 use JML\Module\Author\AuthorService;
 use JML\Module\GenericValueObject\Id;
+use JML\Module\Picture\PictureService;
 use JML\Utilities\Tools;
 use JML\View\JsonModel;
 
@@ -41,6 +42,10 @@ class JsonController extends DefaultController
         $authorService = new AuthorService($this->database);
         $authorList = $authorService->getAuthorList();
         $this->viewRenderer->addViewConfig('authorList', $authorList);
+
+        $pictureService = new PictureService($this->database);
+        $pictureList = $pictureService->getPictureList();
+        $this->viewRenderer->addViewConfig('pictureList', $pictureList);
 
         $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
         $this->jsonModel->send();

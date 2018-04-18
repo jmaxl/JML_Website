@@ -52,5 +52,17 @@ class PictureService
         return $this->pictureRepository->savePictureToDatabase($picture);
     }
 
+    public function getPictureList(): array
+    {
+        $pictureList = [];
+        $result = $this->pictureRepository->getPictureList();
+
+        foreach ( $result as $pictureData){
+
+            $picture = $this->pictureFactory->getPicture($pictureData);
+            $pictureList[] = $picture;
+        }
+        return $pictureList;
+    }
 
 }

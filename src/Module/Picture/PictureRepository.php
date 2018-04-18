@@ -5,6 +5,7 @@ declare (strict_types=1);
 namespace JML\Module\Picture;
 
 use JML\Module\Database\Database;
+use JML\Module\Database\Query;
 use JML\Module\GenericValueObject\Id;
 
 class PictureRepository
@@ -82,5 +83,13 @@ class PictureRepository
         }
 
         return $this->database->execute($query);
+    }
+
+    public function getPictureList(): array
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->orderBy('name', Query::ASC);
+
+        return $this->database->fetchAll($query);
     }
 }
