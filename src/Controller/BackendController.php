@@ -97,4 +97,13 @@ class BackendController extends DefaultController
         header('Location: ' . Tools::getRouteUrl('backend'));
     }
 
+    public function deletePictureAction()
+    {
+        $pictureService = new PictureService($this->database);
+        $picture = $pictureService->getPictureById(Id::fromString(Tools::getValue('pictureId')));
+
+        $pictureService->deletePictureInArticlePictureDatabase($picture);
+        header('Location: ' . Tools::getRouteUrl('backend'));
+    }
+
 }

@@ -13,12 +13,24 @@
         </select>
         <label for="maintext">Text</label>
         <input type="text" id="maintext" name="text" value="{{ article.getText }}">
-        {% for picture in pictureList %}
-            <div class="all-article-pictures">
-                {{ article.getTeaserPicture.getTitle }}
-                <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
-            </div>
-        {% endfor %}
+        <div class="all-article-pictures">
+            <table>
+                {% for picture in pictureList %}
+                    <tr>
+                        <td>
+                            {{ article.getTeaserPicture.getTitle }}
+                            <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="index.php?route=deletePicture&pictureId={{ picture.getPictureId }}"
+                               class="js-delete-picture">Löschen</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
         <input type="file" name="picture">
         <input type="submit" name="submit" value="Bearbeiten">
         <input type="hidden" name="articleId" value="{{ article.getArticleId }}">

@@ -58,6 +58,10 @@ return [
         'createAuthor' => [
             'controller' => 'JsonController',
             'action' => 'createAuthorAction',
+        ],
+        'deletePicture' => [
+            'controller' => 'BackendController',
+            'action' => 'deletePictureAction',
         ]
     ]
 ];

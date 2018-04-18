@@ -92,4 +92,11 @@ class PictureRepository
 
         return $this->database->fetchAll($query);
     }
+
+    public function deletePictureInArticlePictureDatabase(Picture $picture): bool
+    {
+        $query = $this->database->getNewDeleteQuery(self::TABLE);
+        $query->where('pictureId', '=', $picture->getPictureId()->toString());
+        return $this->database->execute($query);
+    }
 }

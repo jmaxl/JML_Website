@@ -4,6 +4,12 @@ $(document).on('click', '.js-delete-article', function (e) {
     }
 });
 
+$(document).on('click', '.js-delete-picture', function (e){
+    if (confirm('Wirklich löschen?') === false) {
+        e.preventDefault();
+    }
+});
+
 $(document).on('click', '.js-edit-article', function () {
     var article = $(this).data('articleId');
 

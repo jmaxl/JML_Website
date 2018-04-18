@@ -65,4 +65,15 @@ class PictureService
         return $pictureList;
     }
 
+    public function getPictureById(Id $pictureId): Picture
+    {
+        $picture = $this->pictureRepository->getPictureByPictureId($pictureId);
+        return $this->pictureFactory->getPicture($picture);
+    }
+
+    public function deletePictureInArticlePictureDatabase(Picture $picture)
+    {
+        $this->pictureRepository->deletePictureInArticlePictureDatabase($picture);
+    }
+
 }
