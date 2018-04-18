@@ -405,3 +405,6 @@ template {
 .articles-container .article-container .article-content p {
   color: green;
 }
+.all-article-pictures img {
+  width: 100px;
+}
