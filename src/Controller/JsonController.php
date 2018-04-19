@@ -63,4 +63,15 @@ class JsonController extends DefaultController
         }
         $this->jsonModel->send('error');
     }
+
+    public function deletePictureAction()
+    {
+        $pictureService = new PictureService($this->database);
+        $picture = $pictureService->getPictureById(Id::fromString(Tools::getValue('pictureId')));
+
+        $pictureService->deletePictureInArticlePictureDatabase($picture);
+
+        $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
+        $this->jsonModel->send();
+    }
 }

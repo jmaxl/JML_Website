@@ -4,10 +4,22 @@ $(document).on('click', '.js-delete-article', function (e) {
     }
 });
 
-$(document).on('click', '.js-delete-picture', function (e){
-    if (confirm('Wirklich löschen?') === false) {
-        e.preventDefault();
+$(document).on('click', '.js-delete-picture', function () {
+    if (confirm('Wirklich löschen?') === true) {
+        var picture = $(this).data('pictureId');
+
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?route=deletePicture',
+            dataType: 'json',
+            data: {
+                pictureId: picture
+            },
+            success: function (response) {
+            console.log(response);}
+        })
     }
+    return false;
 });
 
 $(document).on('click', '.js-edit-article', function () {

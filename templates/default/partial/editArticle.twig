@@ -24,8 +24,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <a href="index.php?route=deletePicture&pictureId={{ picture.getPictureId }}"
-                               class="js-delete-picture">Löschen</a>
+                            <input type="button" name="submit" class="js-delete-picture"
+                                   data-picture-id="{{ picture.getPictureId }}" value="Löschen">
                         </td>
                     </tr>
                 {% endfor %}

@@ -60,7 +60,7 @@ return [
             'action' => 'createAuthorAction',
         ],
         'deletePicture' => [
-            'controller' => 'BackendController',
+            'controller' => 'JsonController',
             'action' => 'deletePictureAction',
         ]
     ]
