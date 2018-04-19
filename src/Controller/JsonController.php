@@ -71,7 +71,6 @@ class JsonController extends DefaultController
 
         $pictureService->deletePictureInArticlePictureDatabase($picture);
 
-        $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
         $this->jsonModel->send();
     }
 }

@@ -6,7 +6,8 @@ $(document).on('click', '.js-delete-article', function (e) {
 
 $(document).on('click', '.js-delete-picture', function () {
     if (confirm('Wirklich löschen?') === true) {
-        var picture = $(this).data('pictureId');
+        var $clickedElement = $(this),
+            picture = $clickedElement.data('pictureId');
 
         $.ajax({
             type: 'POST',
@@ -16,10 +17,12 @@ $(document).on('click', '.js-delete-picture', function () {
                 pictureId: picture
             },
             success: function (response) {
-            console.log(response);}
+                if (response.status === 'success') {
+                    $clickedElement.closest('.js-delete-picture-container').remove();
+                }
+            }
         })
     }
-    return false;
 });
 
 $(document).on('click', '.js-edit-article', function () {

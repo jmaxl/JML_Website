@@ -14,22 +14,14 @@
         <label for="maintext">Text</label>
         <input type="text" id="maintext" name="text" value="{{ article.getText }}">
         <div class="all-article-pictures">
-            <table>
-                {% for picture in pictureList %}
-                    <tr>
-                        <td>
-                            {{ article.getTeaserPicture.getTitle }}
-                            <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="button" name="submit" class="js-delete-picture"
-                                   data-picture-id="{{ picture.getPictureId }}" value="Löschen">
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
+            {% for picture in pictureList %}
+                <div class="delete-picture-container js-delete-picture-container">
+                    <h2>{{ article.getTeaserPicture.getTitle }}</h2>
+                    <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                    <input type="button" name="submit" class="js-delete-picture"
+                           data-picture-id="{{ picture.getPictureId }}" value="Löschen">
+                </div>
+            {% endfor %}
         </div>
         <input type="file" name="picture">
         <input type="submit" name="submit" value="Bearbeiten">

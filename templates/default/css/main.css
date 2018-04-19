@@ -408,3 +408,6 @@ template {
 .all-article-pictures img {
   width: 100px;
 }
+.all-article-pictures .delete-picture-container {
+  width: 100px;
+}
