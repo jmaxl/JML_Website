@@ -14,10 +14,10 @@
         <label for="maintext">Text</label>
         <input type="text" id="maintext" name="text" value="{{ article.getText }}">
         <div class="all-article-pictures">
-            {% for picture in pictureList %}
+            {% for picture in article.getPictureList %}
                 <div class="delete-picture-container js-delete-picture-container">
-                    <h2>{{ article.getTeaserPicture.getTitle }}</h2>
-                    <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                    <h2>{{ picture.getTitle }}</h2>
+                    <img src="{{ picture.getPictureUrl }}" alt="">
                     <input type="button" name="submit" class="js-delete-picture"
                            data-picture-id="{{ picture.getPictureId }}" value="Löschen">
                 </div>

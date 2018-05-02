@@ -9,7 +9,7 @@ use claviska\SimpleImage;
  * Class Image
  * @package JML\Module\GenericValueObject
  */
-class Image
+class Image extends DefaultGenericValueObject
 {
     public const PATH = 'data/image/';
 

@@ -43,9 +43,6 @@ class JsonController extends DefaultController
         $authorList = $authorService->getAuthorList();
         $this->viewRenderer->addViewConfig('authorList', $authorList);
 
-        $pictureService = new PictureService($this->database);
-        $pictureList = $pictureService->getAllPicturesByArticleId(Id::fromString(Tools::getValue('articleId')));
-        $this->viewRenderer->addViewConfig('pictureList', $pictureList);
 
         $this->jsonModel->addJsonConfig('view', $this->viewRenderer->renderJsonView('partial/editArticle.twig'));
         $this->jsonModel->send();

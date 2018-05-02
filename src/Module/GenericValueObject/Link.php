@@ -10,7 +10,7 @@ use League\Uri\Schemes\Http;
  * Class Link
  * @package JML\Module\GenericValueObject
  */
-class Link
+class Link extends DefaultGenericValueObject
 {
     /** @var  Http $link */
     protected $link;

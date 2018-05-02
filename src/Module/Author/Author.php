@@ -3,14 +3,17 @@ declare (strict_types=1);
 
 namespace JML\Module\Author;
 
+use JML\Module\DefaultModel;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
+use JML\Module\User\User;
+use JML\Module\User\UserService;
 
 /**
  * Class Author
  * @package JML\Module\Author
  */
-class Author
+class Author extends DefaultModel
 {
     /** @var Id $authorId */
     protected $authorId;
@@ -24,10 +27,12 @@ class Author
     /** @var  Name $name */
     protected $name;
 
+    /** @var  User $user */
+    protected $user;
+
     /**
      * Author constructor.
      * @param Id $authorId
-
      */
     public function __construct(Id $authorId)
     {
@@ -88,5 +93,17 @@ class Author
     public function setUserId(Id $userId): void
     {
         $this->userId = $userId;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(Id $userId): void
+    {
+        $userService = new UserService($this->database);
+        $user = $userService->getUserById($userId);
+        $this->user = $user;
     }
 }

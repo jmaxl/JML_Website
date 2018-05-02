@@ -7,7 +7,7 @@ namespace JML\Module\GenericValueObject;
  * Class Text
  * @package JML\Module\GenericValueObject
  */
-class Text
+class Text extends DefaultGenericValueObject
 {
     const MIN_TEXT_LENGTH = 5;
 

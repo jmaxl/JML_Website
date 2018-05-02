@@ -7,7 +7,7 @@ namespace JML\Module\GenericValueObject;
  * Class AbstractDatetime
  * @package JML\Module\GenericValueObject
  */
-abstract class AbstractDatetime
+abstract class AbstractDatetime extends DefaultGenericValueObject
 {
     const DATE_FORMAT = 'Y-m-d H:i:s';
 

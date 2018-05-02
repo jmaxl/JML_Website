@@ -82,7 +82,14 @@ $(document).on('click', '.js-create-author-form .js-create-author', function (e)
                 name: name
             },
             success: function (response) {
-                debugger;
+                if (response.status === 'success') {
+                    $('.js-select-author').prepend('<option value="' + response.author.authorId.id +'">' + response.author.firstname.name + ' ' + response.author.name.name + '</option>');
+                    $('.js-create-author-form .js-firstname').val('');
+                    $('.js-create-author-form .js-name').val('');
+                    $('.js-create-author-form .js-user-id').val('');
+                    $('.js-create-author-container').addClass('hidden');
+
+                }
             }
         });
     } else {

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace JML\Module\GenericValueObject;
 
-class Password
+class Password extends DefaultGenericValueObject
 {
     protected $password;
 

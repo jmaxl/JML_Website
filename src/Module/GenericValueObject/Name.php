@@ -7,7 +7,7 @@ namespace JML\Module\GenericValueObject;
  * Class Name
  * @package JML\Module\GenericValueObject
  */
-class Name
+class Name extends DefaultGenericValueObject
 {
     const MIN_NAME_LENGTH = 2;
 

@@ -3,7 +3,7 @@
     <form action="index.php?route=createArticle" method="post" enctype="multipart/form-data">
         Überschrift<input type="text" name="title">
         Teaser<input type="text" name="subtitle">
-        Autor<select multiple name="author[]">
+        Autor<select multiple name="author[]" class="js-select-author">
             {% for author in authorList %}
                <option value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
             {% endfor %}

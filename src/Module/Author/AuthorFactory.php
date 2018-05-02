@@ -36,9 +36,14 @@ class AuthorFactory
                 $author->setName($name);
             }
 
-            if (empty($userId) === false){
-                $author->setUserId($userId);
+            if (empty($result->user) === false) {
+                $userId = Id::fromString($result->userId);
+                $author->setUser($userId);
             }
+
+            //* if (empty($userId) === false){
+            //*     $author->setUserId($userId);
+            //* }
 
             if (empty($firstname) === false){
                 $author->setFirstname($firstname);

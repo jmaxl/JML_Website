@@ -7,7 +7,7 @@ namespace JML\Module\GenericValueObject;
  * Class Description
  * @package JML\Module\GenericValueObject
  */
-class Description
+class Description extends DefaultGenericValueObject
 {
     /** @var string $description */
     protected $description;

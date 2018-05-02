@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
  * Class Filename
  * @package JML\Module\GenericValueObject
  */
-class Filename
+class Filename extends DefaultGenericValueObject
 {
     public const TYPE_JPG = 'jpg';
     public const TYPE_PNG = 'png';
