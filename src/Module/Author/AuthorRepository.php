@@ -70,17 +70,43 @@ class AuthorRepository
 
     public function saveAuthorInDatabase(Author $author): bool
     {
-        $query = $this->database->getNewInsertQuery(self::TABLE);
-        $query->insert('authorId', $author->getAuthorId()->toString());
-        if($author->getFirstname() !== null){
-            $query->insert('firstname', $author->getFirstname()->getName());
+        $saveAuthor = true;
+        if ($author->getUser() !== null && empty($this->getAuthorByUserId($author->getUser()->getUserId())) === false) {
+            $saveAuthor = false;
         }
-        if($author->getName() !== null){
-            $query->insert('name', $author->getName()->getName());
+        if ($author->getFirstname() !== null && $author->getName() !== null && empty($this->getAuthorByFirstnameAndName($author->getFirstname(), $author->getName())) === false) {
+            $saveAuthor = false;
         }
-        if($author->getUserId() !== null){
-            $query->insert('userId', $author->getUserId()->toString());
+        if ($saveAuthor === true) {
+            $query = $this->database->getNewInsertQuery(self::TABLE);
+            $query->insert('authorId', $author->getAuthorId()->toString());
+            if ($author->getFirstname() !== null) {
+                $query->insert('firstname', $author->getFirstname()->getName());
+            }
+            if ($author->getName() !== null) {
+                $query->insert('name', $author->getName()->getName());
+            }
+            if ($author->getUser() !== null) {
+                $query->insert('userId', $author->getUser()->getUserId()->toString());
+            }
+            return $this->database->execute($query);
         }
-        return $this->database->execute($query);
+        return false;
+    }
+
+    protected function getAuthorByUserId(Id $userId)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->where('userId', '=', $userId->toString());
+
+        return $this->database->fetch($query);
+    }
+
+    protected function getAuthorByFirstnameAndName(Name $firstname, Name $name)
+    {
+        $query = $this->database->getNewSelectQuery(self::TABLE);
+        $query->where('firstname', '=', $firstname->getName());
+        $query->andWhere('name', '=', $name->getName());
+        return $this->database->fetch($query);
     }
 }

@@ -6,6 +6,8 @@ namespace JML\Module\Author;
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
+use JML\Module\User\User;
+use JML\Module\User\UserService;
 
 /**
  * Class AuthorService
@@ -19,6 +21,9 @@ class AuthorService
     /** @var AuthorFactory $authorFactory */
     protected $authorFactory;
 
+    /** @var  UserService $userService */
+    protected $userService;
+
     /**
      * AuthorService constructor.
      * @param Database $database
@@ -27,6 +32,8 @@ class AuthorService
     {
         $this->authorRepository = new AuthorRepository($database);
         $this->authorFactory = new AuthorFactory();
+        $this->userService = new UserService($database);
+
     }
 
     /**
@@ -36,8 +43,8 @@ class AuthorService
     public function getAuthorByFirstname(Name $firstName): Author
     {
         $result = $this->authorRepository->getAuthorByFirstname($firstName);
-
-        return $this->authorFactory->getAuthor($result);
+        $user = $this->getUserFromObject($result);
+        return $this->authorFactory->getAuthor($result, $user);
     }
 
     /**
@@ -47,8 +54,8 @@ class AuthorService
     public function getAuthorByAuthorId(Id $authorId): Author
     {
         $result = $this->authorRepository->getAuthorByAuthorId($authorId);
-
-        return $this->authorFactory->getAuthor($result);
+        $user = $this->getUserFromObject($result);
+        return $this->authorFactory->getAuthor($result, $user);
     }
 
     public function getAuthorList(): array
@@ -56,9 +63,9 @@ class AuthorService
         $authorList = [];
         $result = $this->authorRepository->getAuthorList();
 
-        foreach ( $result as $authorData){
-
-            $author = $this->authorFactory->getAuthor($authorData);
+        foreach ($result as $authorData) {
+            $user = $this->getUserFromObject($authorData);
+            $author = $this->authorFactory->getAuthor($authorData, $user);
             $authorList[] = $author;
         }
         return $authorList;
@@ -76,13 +83,22 @@ class AuthorService
         if (empty($object->authorId)) {
             $object->authorId = Id::generateId()->toString();
         }
-
-        return $this->authorFactory->getAuthor($object);
+        $user = $this->getUserFromObject($object);
+        return $this->authorFactory->getAuthor($object, $user);
     }
 
     public function saveAuthorToDatabase(Author $author): bool
     {
         return $this->authorRepository->saveAuthorInDatabase($author);
+    }
+
+    protected function getUserFromObject($object): ?User
+    {
+        if (empty($object->userId) === false) {
+            return $this->userService->getUserById(Id::fromString($object->userId));
+        }
+
+        return null;
     }
 
 }

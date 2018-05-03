@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace JML\Module\User;
 
+use JML\Module\DefaultModel;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Mail;
 use JML\Module\GenericValueObject\Name;
@@ -11,7 +12,7 @@ use JML\Module\GenericValueObject\Name;
  * Class User
  * @package JML\Module\User
  */
-class User
+class User extends DefaultModel
 {
     /** @var Id $userId */
     protected $userId;

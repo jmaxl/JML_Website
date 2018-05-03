@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace JML\Module\User;
 
+use JML\Module\Author\Author;
 use JML\Module\Database\Database;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Mail;
@@ -103,6 +104,28 @@ class UserService
         }
 
         return $user;
+    }
+
+    public function getAllNonAuthorUser(array $authorList): array
+    {
+        $userArray = [];
+        $userList = $this->userRepository->getAllUser();
+
+        foreach ($userList as $userData) {
+            $user = $this->userFactory->getUser($userData);
+            $isAuthor = false;
+            /** @var Author $author */
+            foreach ($authorList as $author) {
+                if ($author->getUser() !== null && $author->getUser()->getUserId()->toString() === $user->getUserId()->toString()) {
+                    $isAuthor = true;
+                }
+            }
+            if ($isAuthor === false) {
+                $userArray[] = $user;
+            }
+        }
+
+        return $userArray;
     }
 }
 

@@ -82,8 +82,24 @@ $(document).on('click', '.js-create-author-form .js-create-author', function (e)
                 name: name
             },
             success: function (response) {
+                debugger;
                 if (response.status === 'success') {
-                    $('.js-select-author').prepend('<option value="' + response.author.authorId.id +'">' + response.author.firstname.name + ' ' + response.author.name.name + '</option>');
+                    var authorName,
+                        authorFirstname;
+
+                    if (response.author.firstname !== null) {
+                        authorFirstname = response.author.firstname.name;
+                    } else if (response.author.user.firstname !== null){
+                        authorFirstname = response.author.user.firstname.name;
+                    }
+
+                    if (response.author.name !== null){
+                        authorName = response.author.name.name;
+                    } else if (response.author.user.name !== null){
+                        authorName = response.author.user.name.name;
+                    }
+
+                    $('.js-select-author').prepend('<option value="' + response.author.authorId.id +'">' + authorFirstname + ' ' + authorName + '</option>');
                     $('.js-create-author-form .js-firstname').val('');
                     $('.js-create-author-form .js-name').val('');
                     $('.js-create-author-form .js-user-id').val('');

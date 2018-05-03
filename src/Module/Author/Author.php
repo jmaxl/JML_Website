@@ -7,7 +7,6 @@ use JML\Module\DefaultModel;
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
 use JML\Module\User\User;
-use JML\Module\User\UserService;
 
 /**
  * Class Author
@@ -17,9 +16,6 @@ class Author extends DefaultModel
 {
     /** @var Id $authorId */
     protected $authorId;
-
-    /** @var Id $userId */
-    protected $userId;
 
     /** @var Name $firstname */
     protected $firstname;
@@ -48,19 +44,19 @@ class Author extends DefaultModel
     }
 
     /**
-     * @return Id
-     */
-    public function getUserId(): ?Id
-    {
-        return $this->userId;
-    }
-
-    /**
      * @return Name
      */
     public function getFirstname(): ?Name
     {
-        return $this->firstname;
+        if ($this->firstname !== null) {
+            return $this->firstname;
+        }
+
+        if ($this->user !== null) {
+            return $this->user->getFirstname();
+        }
+
+        return null;
     }
 
     /**
@@ -76,7 +72,15 @@ class Author extends DefaultModel
      */
     public function getName(): ?Name
     {
-        return $this->name;
+        if ($this->name !== null) {
+            return $this->name;
+        }
+
+        if ($this->user !== null) {
+            return $this->user->getName();
+        }
+
+        return null;
     }
 
     /**
@@ -87,23 +91,13 @@ class Author extends DefaultModel
         $this->name = $name;
     }
 
-    /**
-     * @param Id $userId
-     */
-    public function setUserId(Id $userId): void
-    {
-        $this->userId = $userId;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(Id $userId): void
+    public function setUser(User $user): void
     {
-        $userService = new UserService($this->database);
-        $user = $userService->getUserById($userId);
         $this->user = $user;
     }
 }

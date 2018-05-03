@@ -5,6 +5,7 @@ namespace JML\Module\Author;
 
 use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Name;
+use JML\Module\User\User;
 
 /**
  * Class AuthorFactory
@@ -17,17 +18,15 @@ class AuthorFactory
      * @param $result
      * @return Author|null
      */
-    public function getAuthor($result): ?Author
+    public function getAuthor($result, ?User $user): ?Author
     {
-        if (empty($result->userId) === false){
-            $userId = Id::fromString($result->userId);
-        }
+        $firstname = null;
 
-        if (empty($result->firstname) === false){
+        if (empty($result->firstname) === false) {
             $firstname = Name::fromString($result->firstname);
         }
 
-        if (isset($userId) || isset($firstname)){
+        if ($user !== null || $firstname !== null) {
             $authorId = Id::fromString($result->authorId);
             $author = new Author($authorId);
 
@@ -36,16 +35,11 @@ class AuthorFactory
                 $author->setName($name);
             }
 
-            if (empty($result->user) === false) {
-                $userId = Id::fromString($result->userId);
-                $author->setUser($userId);
+            if ($user !== null) {
+                $author->setUser($user);
             }
 
-            //* if (empty($userId) === false){
-            //*     $author->setUserId($userId);
-            //* }
-
-            if (empty($firstname) === false){
+            if ($firstname !== null) {
                 $author->setFirstname($firstname);
             }
 
