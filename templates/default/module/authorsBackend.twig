@@ -1,0 +1,12 @@
+<div class="authors-backend-container">
+    <div class="author-backend-container">
+        {% for author in authorList %}
+            <div>
+                {{ author.getFirstname }} {{ author.getName }}
+                <a href="index.php?route=deleteAuthor&authorId={{ author.getAuthorId }}" class="js-delete">Löschen</a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+</div>

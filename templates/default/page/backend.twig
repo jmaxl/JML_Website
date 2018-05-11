@@ -5,7 +5,7 @@
         Teaser<input type="text" name="subtitle">
         Autor<select multiple name="author[]" class="js-select-author">
             {% for author in authorList %}
-               <option value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
+                <option value="{{ author.getAuthorId }}">{{ author.getFirstname }} {{ author.getName }}</option>
             {% endfor %}
         </select>
         <td><input type="button" name="create-author-button" class="js-create-author" value="Neuer Autor"></td>
@@ -14,5 +14,7 @@
         <input type="submit" name="submit" value="Erstellen">
     </form>
     {% include 'module/articlesBackend.twig' %}
+    {% include 'module/authorsBackend.twig' %}
     <div class="js-edit-article-container"></div>
+
 </div>

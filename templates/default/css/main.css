@@ -389,6 +389,56 @@ template {
 [hidden] {
   display: none;
 }
+@font-face {
+  font-family: 'Lusitana-Regular';
+  src: url('../font/Lusitana-Regular.ttf');
+}
+@font-face {
+  font-family: 'Renner-Book';
+  src: url('../font/renner-book.otf');
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lusitana-Regular', 'Times New Roman', serif;
+  font-size: 1em;
+  color: #000000;
+}
+header {
+  width: 1100px;
+  margin: 0 auto;
+  height: 250px;
+  display: flex;
+  justify-content: space-between;
+}
+header .header-logo-container .logo .name {
+  font-size: 3.75em;
+}
+header .header-logo-container .logo .name h1 {
+  margin: 0;
+}
+header .header-logo-container .logo .profession {
+  font-size: 1.75em;
+  font-family: 'Renner-Book', Arial, sans-serif;
+  text-align: right;
+  line-height: 0;
+}
+header .header-navigation-container {
+  margin-top: 132px;
+}
+header .header-navigation-container .navigation {
+  display: flex;
+  justify-content: flex-end;
+}
+header .header-navigation-container .navigation div {
+  margin-left: 20px;
+}
+header .header-navigation-container .navigation div a {
+  font-family: 'Renner-Book', Arial, sans-serif;
+}
+header .header-navigation-container .navigation div a:hover {
+  text-decoration: none;
+}
 .hidden {
   display: none;
 }

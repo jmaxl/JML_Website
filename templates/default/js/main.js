@@ -1,4 +1,4 @@
-$(document).on('click', '.js-delete-article', function (e) {
+$(document).on('click', '.js-delete', function (e) {
     if (confirm('Wirklich löschen?') === false) {
         e.preventDefault();
     }

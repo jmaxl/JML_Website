@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: @font-family-1;
+  font-size: 1em;
+  color: @color-2;
+}
+
+header {
+  width: @max-width;
+  margin: 0 auto;
+  height: 250px;
+  display: flex;
+  justify-content: space-between;
+
+  .header-logo-container {
+    .logo {
+      .name {
+        font-size: 3.75em;
+
+        h1 {
+          margin: 0;
+        }
+      }
+
+      .profession {
+        font-size: 1.75em;
+        font-family: @font-family-2;
+        text-align: right;
+        line-height: 0;
+      }
+    }
+  }
+
+  .header-navigation-container {
+    margin-top: 132px;
+
+    .navigation {
+      display: flex;
+      justify-content: flex-end;
+
+      div{
+        margin-left: 20px;
+
+        a{
+          font-family: @font-family-2;
+
+          &:hover{
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+

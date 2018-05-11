@@ -106,6 +106,7 @@ class ArticleService
         if ($this->articleRepository->safeArticleToDatabase($article) === false) {
             return false;
         }
+        $this->articleRepository->deleteAuthorArticleInDatabase($article);
         $authorList = $article->getAuthorList();
         foreach ($authorList as $author) {
             if ($this->articleRepository->safeAuthorToAuthorArticleTable($author, $article->getArticleId()) === false) {

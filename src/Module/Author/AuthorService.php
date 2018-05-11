@@ -73,7 +73,10 @@ class AuthorService
 
     public function deleteAuthorInDatabase(Author $author): bool
     {
-        return $this->authorRepository->deleteAuthorInDatabase($author);
+        if($this->authorRepository->deleteAuthorInDatabase($author) === true){
+            $this->authorRepository->deleteAuthorArticleInDatabase($author);
+        }
+        return false;
     }
 
     public function getAuthorByParams(array $params): ?Author
@@ -100,5 +103,4 @@ class AuthorService
 
         return null;
     }
-
 }

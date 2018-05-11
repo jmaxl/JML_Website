@@ -62,6 +62,10 @@ return [
         'deletePicture' => [
             'controller' => 'JsonController',
             'action' => 'deletePictureAction',
+        ],
+        'deleteAuthor' => [
+            'controller' =>'BackendController',
+            'action' => 'deleteAuthorAction',
         ]
     ]
 ];
