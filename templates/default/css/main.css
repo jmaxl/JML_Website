@@ -414,6 +414,9 @@ header {
 header .header-logo-container .logo .name {
   font-size: 3.75em;
 }
+header .header-logo-container .logo .name a {
+  text-decoration: none;
+}
 header .header-logo-container .logo .name h1 {
   margin: 0;
 }
@@ -444,20 +447,35 @@ header .header-navigation-container .navigation div a:hover {
 }
 .articles-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 1100px;
+  margin: 0 auto;
 }
 .articles-container img {
   width: 100%;
 }
 .articles-container .article-container {
   color: #000000;
-  width: 300px;
+  width: 33%;
+}
+.articles-container .article-container .article-header .article-created {
+  text-align: right;
+  margin-top: -8%;
 }
 .articles-container .article-container .article-content p {
-  color: green;
+  color: #000000;
 }
 .all-article-pictures img {
   width: 100px;
 }
 .all-article-pictures .delete-picture-container {
   width: 100px;
+}
+.login-container {
+  width: 1100px;
+  margin: 0 auto;
+}
+.login-container form input {
+  font-family: 'Renner-Book', Arial, sans-serif;
 }

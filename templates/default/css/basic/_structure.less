@@ -17,6 +17,9 @@ header {
     .logo {
       .name {
         font-size: 3.75em;
+        a {
+          text-decoration: none;
+        }
 
         h1 {
           margin: 0;
@@ -39,13 +42,13 @@ header {
       display: flex;
       justify-content: flex-end;
 
-      div{
+      div {
         margin-left: 20px;
 
-        a{
+        a {
           font-family: @font-family-2;
 
-          &:hover{
+          &:hover {
             text-decoration: none;
           }
         }
@@ -54,3 +57,56 @@ header {
   }
 }
 
+.hidden {
+  display: none;
+}
+
+.articles-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: @max-width;
+  margin: 0 auto;
+
+  img {
+    width: 100%;
+  }
+
+  .article-container {
+    color: @color-2;
+    width: 33%;
+
+    .article-header {
+
+      .article-created {
+        text-align: right;
+        margin-top: -8%;
+      }
+    }
+
+    .article-content {
+      p {
+        color: @color-2;
+      }
+    }
+  }
+}
+
+.all-article-pictures {
+  img {
+    width: 100px;
+  }
+  .delete-picture-container {
+    width: 100px;
+  }
+}
+
+.login-container {
+  width: @max-width;
+  margin: 0 auto;
+  form {
+    input {
+      font-family: @font-family-2;
+    }
+  }
+}

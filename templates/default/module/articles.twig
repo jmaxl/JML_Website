@@ -1,19 +1,21 @@
 <div class="articles-container">
     {% if articles|length > 0 %}
         {% for article in articles %}
-           <div class="article-container">
-                   <div class="article-header">
-                           <div class="article-picture">
-                                   {{ article.getTeaserPicture.getTitle }}
-                                   <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
-                           </div>
-                           <div class="article-created"></div>
-                   </div>
-                   <div class="article-content">
-                           <h2>{{ article.getTitle }}</h2>
-                           <p>{{ article.getSubtitle }}</p>
-                   </div>
-           </div>
+            <div class="article-container">
+                <div class="article-header">
+                    <div class="article-picture">
+                        {{ article.getTeaserPicture.getTitle }}
+                        <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                    </div>
+                    <div class="article-created">
+                        <mark>{{ article.getCreated }}</mark>
+                    </div>
+                </div>
+                <div class="article-content">
+                    <h2>{{ article.getTitle }}</h2>
+                    <p>{{ article.getSubtitle }}</p>
+                </div>
+            </div>
         {% endfor %}
     {% else %}
         Es gibt noch keine Artikel.
