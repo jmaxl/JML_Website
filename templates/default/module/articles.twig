@@ -6,14 +6,16 @@
                     <div class="article-picture">
                         {{ article.getTeaserPicture.getTitle }}
                         <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
-                    </div>
-                    <div class="article-created">
-                        <mark>{{ article.getCreated }}</mark>
+                        <div class="article-created">
+                            <p>{{ article.getCreated }}</p>
+                        </div>
                     </div>
                 </div>
                 <div class="article-content">
                     <h2>{{ article.getTitle }}</h2>
                     <p>{{ article.getSubtitle }}</p>
+                    <div class="article-read-more">
+                        <a href="">Weiterlesen</a></div>
                 </div>
             </div>
         {% endfor %}

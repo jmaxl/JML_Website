@@ -66,6 +66,10 @@ return [
         'deleteAuthor' => [
             'controller' =>'BackendController',
             'action' => 'deleteAuthorAction',
+        ],
+        'contact' => [
+            'controller' => 'IndexController',
+            'action' => 'contactAction'
         ]
     ]
 ];

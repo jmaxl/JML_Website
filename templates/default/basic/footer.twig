@@ -1,6 +1,10 @@
 <footer>
+    <div class="footer-navigation-container">
+        {% include ('module/navigation.twig') %}
+    </div>
+
     <p>&copy; JML 2018</p>
-    {% if loggedInUser is defined%}
+    {% if loggedInUser is defined %}
         <p>Halle {{ loggedInUser.getFirstname }}</p>
     {% endif %}
 </footer>

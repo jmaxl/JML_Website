@@ -442,6 +442,20 @@ header .header-navigation-container .navigation div a {
 header .header-navigation-container .navigation div a:hover {
   text-decoration: none;
 }
+footer {
+  width: 1100px;
+  margin: 0 auto;
+  height: 50px;
+}
+footer p {
+  text-align: center;
+}
+footer .footer-navigation-container a {
+  font-family: 'Renner-Book', Arial, sans-serif;
+}
+footer .footer-navigation-container a:hover {
+  text-decoration: none;
+}
 .hidden {
   display: none;
 }
@@ -459,12 +473,15 @@ header .header-navigation-container .navigation div a:hover {
   color: #000000;
   width: 33%;
 }
-.articles-container .article-container .article-header .article-created {
+.articles-container .article-container .article-header .article-picture .article-created p {
   text-align: right;
-  margin-top: -8%;
+  background-color: #ffff00;
 }
 .articles-container .article-container .article-content p {
   color: #000000;
+}
+.articles-container .article-container .article-content .article-read-more {
+  text-align: right;
 }
 .all-article-pictures img {
   width: 100px;
@@ -478,4 +495,11 @@ header .header-navigation-container .navigation div a:hover {
 }
 .login-container form input {
   font-family: 'Renner-Book', Arial, sans-serif;
+}
+.contact-container {
+  width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

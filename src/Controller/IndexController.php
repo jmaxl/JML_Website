@@ -54,4 +54,9 @@ class IndexController extends DefaultController
             header('Location: ' . Tools::getRouteUrl('backend'));
         }
     }
+
+    public function contactAction(): void
+    {
+        $this->showStandardPage('contact');
+    }
 }
