@@ -4,7 +4,9 @@ declare (strict_types=1);
 namespace JML\Controller;
 
 use JML\Module\Article\ArticleService;
+use JML\Module\GenericValueObject\Id;
 use JML\Module\GenericValueObject\Mail;
+use JML\Module\Tag\TagService;
 use JML\Module\User\UserService;
 use JML\Utilities\Tools;
 
@@ -21,6 +23,8 @@ class IndexController extends DefaultController
     {
         $articleService = new ArticleService($this->database);
         $articles = $articleService->getAllArticleOrderByDate();
+        $tagService = new TagService($this->database);
+        var_dump($tagService->getTagByTagId(Id::fromString('3c12088c-1a28-4857-ba54-630235c1831b')));
 
         $this->viewRenderer->addViewConfig('articles', $articles);
         $this->viewRenderer->addViewConfig('page', 'home');
@@ -58,5 +62,16 @@ class IndexController extends DefaultController
     public function contactAction(): void
     {
         $this->showStandardPage('contact');
+    }
+
+    public function articleAction(): void
+    {
+        $articleId = Id::fromString(Tools::getValue('articleId'));
+        $articleService = new ArticleService($this->database);
+        $article = $articleService->getArticleById($articleId);
+
+        $this->viewRenderer->addViewConfig('article', $article);
+        $this->viewRenderer->addViewConfig('page', 'article');
+        $this->viewRenderer->renderTemplate();
     }
 }

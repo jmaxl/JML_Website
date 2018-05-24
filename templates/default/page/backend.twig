@@ -11,10 +11,13 @@
         <td><input type="button" name="create-author-button" class="js-create-author" value="Neuer Autor"></td>
         Text<input type="text" name="text">
         Bild<input type="file" name="picture">
+        Tags<input type="text" nname="tags">
         <input type="submit" name="submit" value="Erstellen">
     </form>
     {% include 'module/articlesBackend.twig' %}
     {% include 'module/authorsBackend.twig' %}
     <div class="js-edit-article-container"></div>
-
+    {% if loggedInUser.isAdmin is same as(true) %}
+        {% include 'module/userBackend.twig' %}
+    {% endif %}
 </div>

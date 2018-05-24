@@ -41,6 +41,9 @@ class User extends DefaultModel
     /** @var  bool $isLoggedIn */
     protected $isLoggedIn;
 
+    /** @var  bool $isAdmin*/
+    protected $isAdmin;
+
     /**
      * User constructor.
      * @param Id $userId
@@ -59,6 +62,7 @@ class User extends DefaultModel
         $this->password = $password;
         $this->verified = $verified;
         $this->isLoggedIn = false;
+        $this->isAdmin = false;
     }
 
     /**
@@ -215,5 +219,15 @@ class User extends DefaultModel
     public function setVerified(bool $verified)
     {
         $this->verified = $verified;
+    }
+
+    public function setIsAdmin(bool $isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->isAdmin;
     }
 }

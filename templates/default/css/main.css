@@ -429,32 +429,31 @@ header .header-logo-container .logo .profession {
 header .header-navigation-container {
   margin-top: 132px;
 }
-header .header-navigation-container .navigation {
+.navigation {
   display: flex;
   justify-content: flex-end;
 }
-header .header-navigation-container .navigation div {
+.navigation div {
   margin-left: 20px;
 }
-header .header-navigation-container .navigation div a {
+.navigation a {
   font-family: 'Renner-Book', Arial, sans-serif;
 }
-header .header-navigation-container .navigation div a:hover {
+.navigation a:hover {
   text-decoration: none;
 }
 footer {
   width: 1100px;
-  margin: 0 auto;
+  margin: 50px auto 10px auto;
   height: 50px;
+}
+footer .footer-navigation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 footer p {
   text-align: center;
-}
-footer .footer-navigation-container a {
-  font-family: 'Renner-Book', Arial, sans-serif;
-}
-footer .footer-navigation-container a:hover {
-  text-decoration: none;
 }
 .hidden {
   display: none;
@@ -466,6 +465,9 @@ footer .footer-navigation-container a:hover {
   width: 1100px;
   margin: 0 auto;
 }
+.articles-container a {
+  text-decoration: none;
+}
 .articles-container img {
   width: 100%;
 }
@@ -473,7 +475,21 @@ footer .footer-navigation-container a:hover {
   color: #000000;
   width: 33%;
 }
+.articles-container .article-container .article-header .article-picture {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+.articles-container .article-container .article-header .article-picture img {
+  min-height: 200px;
+}
+.articles-container .article-container .article-header .article-picture .article-created {
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+}
 .articles-container .article-container .article-header .article-picture .article-created p {
+  padding: 3px;
   text-align: right;
   background-color: #ffff00;
 }

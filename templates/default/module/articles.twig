@@ -4,18 +4,19 @@
             <div class="article-container">
                 <div class="article-header">
                     <div class="article-picture">
-                        {{ article.getTeaserPicture.getTitle }}
-                        <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                        <a href="index.php?route=article&articleId={{ article.getArticleId }}">
+                            <img src="{{ article.getTeaserPicture.getPictureUrl }}" alt="">
+                        </a>
                         <div class="article-created">
-                            <p>{{ article.getCreated }}</p>
+                            <p>{{ article.getCreated.getDateString }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="article-content">
-                    <h2>{{ article.getTitle }}</h2>
-                    <p>{{ article.getSubtitle }}</p>
-                    <div class="article-read-more">
-                        <a href="">Weiterlesen</a></div>
+                    <a href="index.php?route=article&articleId={{ article.getArticleId }}">
+                        <h2>{{ article.getTitle }}</h2>
+                        <p>{{ article.getSubtitle }}</p>
+                    </a>
                 </div>
             </div>
         {% endfor %}

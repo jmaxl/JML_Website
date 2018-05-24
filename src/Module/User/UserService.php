@@ -79,19 +79,13 @@ class UserService
      * @todo remove fake data and use it correct
      * @return bool
      */
-    public function saveUser(): bool
+    public function getUserByParams(array $params): ?User
     {
-        $fake = new \stdClass();
-        $fake->userId = Id::generateId()->toString();
-        $fake->name = 'Melanie';
-        $fake->firstname = 'Melanie';
-        $fake->username = 'MelaniesMutti';
-        $fake->mail = 'melanie@melanie.de';
-        $fake->password = 'melanie123';
+        $object = (object)$params;
+        $object->verified = true;
+        $object->userId = Id::generateId()->toString();
 
-        $user = $this->userFactory->getUser($fake);
-
-        return $this->userRepository->saveUser($user);
+        return $this->userFactory->getUser($object);
     }
 
     public function getAllUser(): array
@@ -127,6 +121,12 @@ class UserService
 
         return $userArray;
     }
+
+    public function saveUserToDatabase(User $user): bool
+    {
+        return $this->userRepository->saveUser($user);
+    }
+
 }
 
 

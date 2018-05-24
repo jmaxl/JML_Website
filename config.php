@@ -70,6 +70,14 @@ return [
         'contact' => [
             'controller' => 'IndexController',
             'action' => 'contactAction'
+        ],
+        'article' => [
+            'controller' => 'IndexController',
+            'action' => 'articleAction'
+        ],
+        'createUser' => [
+            'controller' => 'BackendController',
+            'action' => 'createUserAction'
         ]
     ]
 ];

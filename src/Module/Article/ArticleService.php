@@ -101,15 +101,15 @@ class ArticleService
         return $article;
     }
 
-    public function safeArticleToDatabase(Article $article): bool
+    public function saveArticleToDatabase(Article $article): bool
     {
-        if ($this->articleRepository->safeArticleToDatabase($article) === false) {
+        if ($this->articleRepository->saveArticleToDatabase($article) === false) {
             return false;
         }
         $this->articleRepository->deleteAuthorArticleInDatabase($article);
         $authorList = $article->getAuthorList();
         foreach ($authorList as $author) {
-            if ($this->articleRepository->safeAuthorToAuthorArticleTable($author, $article->getArticleId()) === false) {
+            if ($this->articleRepository->saveAuthorToAuthorArticleTable($author, $article->getArticleId()) === false) {
                 throw new \Exception('Da ist etwas schief gegangen!');
             }
         }

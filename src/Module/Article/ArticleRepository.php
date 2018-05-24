@@ -56,7 +56,7 @@ class ArticleRepository
         return $this->database->fetchAll($query);
     }
 
-    public function safeArticleToDatabase(Article $article): bool
+    public function saveArticleToDatabase(Article $article): bool
     {
         if (empty($this->getArticleById($article->getArticleId())) === true) {
             $query = $this->database->getNewInsertQuery(self::TABLE);
@@ -81,7 +81,7 @@ class ArticleRepository
 
     }
 
-    public function safeAuthorToAuthorArticleTable(Author $author, Id $articleId): bool
+    public function saveAuthorToAuthorArticleTable(Author $author, Id $articleId): bool
     {
         if(empty($this->getAuthorArticleByAuthorAndArticleId($author, $articleId)) === true) {
             $query = $this->database->getNewInsertQuery(self::TABLE_ARTICLE_AUTHOR);

@@ -36,6 +36,11 @@ class UserFactory
             $user->setName($name);
         }
 
+        if($result->isAdmin !== null){
+            $isAdmin = (bool) $result->isAdmin;
+            $user->setIsAdmin($isAdmin);
+        }
+
         return $user;
     }
 

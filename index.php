@@ -4,6 +4,7 @@ declare (strict_types=1);
 namespace JML;
 
 use JML\Controller\IndexController;
+use JML\Module\GenericValueObject\Id;
 use JML\Utilities\Tools;
 
 session_start();

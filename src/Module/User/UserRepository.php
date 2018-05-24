@@ -63,6 +63,8 @@ class UserRepository
         $query->insert('username', $user->getUsername()->getName());
         $query->insert('mail', $user->getMail()->getMail());
         $query->insert('password', $user->getPassword());
+        $query->insert('verified', $user->isVerified());
+        $query->insert('isAdmin', $user->isAdmin());
 
         if($user->getName() !== null){
             $query->insert('name', $user->getName()->getName());
