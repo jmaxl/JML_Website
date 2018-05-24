@@ -1,0 +1,5 @@
+CREATE TABLE `tag` (
+	`tagId` VARCHAR(200) NOT NULL,
+	`tagName` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`tagId`)
+)
